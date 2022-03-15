@@ -900,8 +900,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864962474}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
+  m_Controller: {fileID: 9100000, guid: 037a5a1263530b045a37c199c6abfc11, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2678,13 +2678,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 35235349, guid: b340d3f42728ad743bf5080056d78103, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 35235349, guid: b340d3f42728ad743bf5080056d78103, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 35235349, guid: b340d3f42728ad743bf5080056d78103, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 35235351, guid: b340d3f42728ad743bf5080056d78103, type: 3}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 35235351, guid: b340d3f42728ad743bf5080056d78103, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 1651666634837241890, guid: b340d3f42728ad743bf5080056d78103, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1651666634837241890, guid: b340d3f42728ad743bf5080056d78103, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1651666634837241890, guid: b340d3f42728ad743bf5080056d78103, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2739,6 +2759,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 941297002, guid: 5f4c0e57ecff62e428c766e92a4d4b38, type: 3}
+      propertyPath: m_Speed
+      value: 5.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 941297002, guid: 5f4c0e57ecff62e428c766e92a4d4b38, type: 3}
+      propertyPath: m_Acceleration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 941297002, guid: 5f4c0e57ecff62e428c766e92a4d4b38, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 3000
+      objectReference: {fileID: 0}
     - target: {fileID: 4083396094418073738, guid: 5f4c0e57ecff62e428c766e92a4d4b38, type: 3}
       propertyPath: m_Name
       value: Player
