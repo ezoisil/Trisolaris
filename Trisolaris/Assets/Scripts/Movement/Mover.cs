@@ -4,41 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Mover : MonoBehaviour
+namespace Trisolaris.Movement
 {
-    NavMeshAgent navMeshAgent;
-    Animator animator;
+    public class Mover : MonoBehaviour
+    {
+        NavMeshAgent navMeshAgent;
+        Animator animator;
 
-    private void Awake()
-    {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-    }
-    void Update()
-    {
-        if (Input.GetMouseButton(0) )
+        private void Awake()
         {
-            MoveToCursor();
+            navMeshAgent = GetComponent<NavMeshAgent>();
+            animator = GetComponent<Animator>();
         }
-        UpdateAnimator();
-    }
-
-    private void UpdateAnimator()
-    {
-        Vector3 velocity = navMeshAgent.velocity;
-        Vector3 localVelocity = transform.InverseTransformDirection(velocity);
-        float forwardSpeed = localVelocity.z;
-        animator.SetFloat("forwardSpeed", forwardSpeed);
-    }
-
-    private void MoveToCursor()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        bool hasHit = Physics.Raycast(ray, out hit);
-        if (hasHit)
+        void Update()
         {
-            navMeshAgent.destination = hit.point;
+            UpdateAnimator();
+        }
+
+        private void UpdateAnimator()
+        {
+            Vector3 velocity = navMeshAgent.velocity;
+            Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+            float forwardSpeed = localVelocity.z;
+            animator.SetFloat("forwardSpeed", forwardSpeed);
+        }
+
+
+
+        public void MoveTo(Vector3 destination)
+        {
+            navMeshAgent.destination = destination;
         }
     }
 }
