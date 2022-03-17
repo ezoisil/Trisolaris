@@ -8,7 +8,7 @@ namespace Trisolaris.Combat
     {
         public void Attack(CombatTarget target)
         {
-
+            Debug.Log("attack!");
         }
     }
 }

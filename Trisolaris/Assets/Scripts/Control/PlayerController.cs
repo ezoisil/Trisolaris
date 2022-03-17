@@ -9,13 +9,16 @@ namespace Trisolaris.Control
 {
     public class PlayerController : MonoBehaviour
     {
+        int ATTACK_BUTTON = 1;
+        int MOVE_BUTTON = 0;
+        
         private void Update()
         {
-            InteractWithCombat();
-            InteractWithMovement();
+            if(InteractWithCombat())return;
+            if (InteractWithMovement()) return; 
         }
 
-        private void InteractWithCombat()
+        private bool InteractWithCombat()
         {
             RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
             foreach (RaycastHit hit in hits)
@@ -26,30 +29,32 @@ namespace Trisolaris.Control
                     continue;
                 }
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(ATTACK_BUTTON))
                 {
-                    GetComponent<Fighter>().Attack(target);
+                    GetComponent<Fighter>().Attack(target);                    
+                }else if (Input.GetMouseButton(MOVE_BUTTON))
+                {
+                    GetComponent<Mover>().MoveTo(hit.point);
                 }
-                
+                return true;
             }
+            return false;
         }
 
-        private void InteractWithMovement()
-        {
-            if (Input.GetMouseButton(0))
-            {
-                MoveToCursor();
-            }
-        }
-
-        private void MoveToCursor()
+        private bool InteractWithMovement()
         {
             RaycastHit hit;
             bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+            
             if (hasHit)
             {
-                GetComponent<Mover>().MoveTo(hit.point);
+                if(Input.GetMouseButton(MOVE_BUTTON) || Input.GetMouseButton(ATTACK_BUTTON))
+                {
+                    GetComponent<Mover>().MoveTo(hit.point);
+                }
+                return true;
             }
+            return false;
         }
 
         private static Ray GetMouseRay()
