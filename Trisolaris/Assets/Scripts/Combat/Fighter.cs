@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Trisolaris.Core;
 using Trisolaris.Movement;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ namespace Trisolaris.Combat
 
         public void Attack(CombatTarget combatTarget)
         {
+            GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget.transform;
             Debug.Log("attack!");
         }

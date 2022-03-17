@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Trisolaris.Combat;
+using Trisolaris.Core;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -29,7 +31,13 @@ namespace Trisolaris.Movement
             animator.SetFloat("forwardSpeed", forwardSpeed);
         }
 
-
+        public void StartMoveAction(Vector3 destination)
+        {
+            GetComponent<ActionScheduler>().StartAction(this);
+            GetComponent<Fighter>().Cancel();
+            MoveTo(destination);
+        }
+        
         public void MoveTo(Vector3 destination)
         {
             navMeshAgent.destination = destination;
