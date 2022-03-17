@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Trisolaris.Combat
 {
-    public class Fighter : MonoBehaviour
+    public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float weaponRange = 2f;
         
@@ -27,7 +27,7 @@ namespace Trisolaris.Combat
             }
             else
             {
-                mover.Stop();
+                mover.Cancel();
             }
         }
 
