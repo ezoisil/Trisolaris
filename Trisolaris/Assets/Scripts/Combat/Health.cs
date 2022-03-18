@@ -7,11 +7,23 @@ namespace Trisolaris.Combat
     public class Health : MonoBehaviour
     {
         [SerializeField] float health = 100;
+        bool isDead = false;
 
         public void TakeDamage(float damage)
         {
+            if (isDead) return;
             health = Mathf.Max(health - damage, 0);
-            print(health);
+            if(health == 0)
+            {
+                Die();
+                isDead = true;
+            }
+
+        }
+
+        void Die()
+        {
+            GetComponent<Animator>().SetTrigger("die");
         }
     }
 }
