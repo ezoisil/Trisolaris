@@ -12,13 +12,15 @@ namespace Trisolaris.Combat
         [SerializeField] float timeBetweenAttacks;
         [SerializeField] float weaponDamage = 5f;
 
-        Transform target;
+        Health target;
         Mover mover;
         float timeSinceLastAttack;
+        Animator animator;
 
         private void Awake()
         {
             mover = GetComponent<Mover>();
+            animator = GetComponent<Animator>();
         }
 
         private void Update()
@@ -27,9 +29,10 @@ namespace Trisolaris.Combat
 
 
             if (target == null) return;
+            if (target.IsDead()) return;
             if (!GetIsInRange())
             {
-                mover.MoveTo(target.position);
+                mover.MoveTo(target.transform.position);
             }
             else
             {
@@ -44,7 +47,7 @@ namespace Trisolaris.Combat
             if (timeSinceLastAttack > timeBetweenAttacks)
             {
                 // This will tritgger the Hit() event.
-                GetComponent<Animator>().SetTrigger("attack");
+                animator.SetTrigger("attack");
                 timeSinceLastAttack = 0;
             }
 
@@ -52,25 +55,25 @@ namespace Trisolaris.Combat
         // This is an animation event
         void Hit()
         {
-            Health healthComponent = target.GetComponent<Health>();
-            healthComponent.TakeDamage(weaponDamage);
+            target.TakeDamage(weaponDamage);
         }
 
         private bool GetIsInRange()
         {
-            return Vector3.Distance(transform.position, target.position) < weaponRange;
+            return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
         }
 
         public void Attack(CombatTarget combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
-            target = combatTarget.transform;
+            target = combatTarget.GetComponent<Health>();
             Debug.Log("attack!");
         }
 
         public void Cancel()
         {
             target = null;
+            animator.SetTrigger("stopAttacking");
         }
 
 

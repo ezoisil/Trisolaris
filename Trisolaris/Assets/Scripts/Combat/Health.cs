@@ -21,6 +21,10 @@ namespace Trisolaris.Combat
 
         }
 
+        public bool IsDead()
+        {
+            return isDead;
+        }
         void Die()
         {
             GetComponent<Animator>().SetTrigger("die");
