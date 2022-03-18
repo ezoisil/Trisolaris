@@ -9,9 +9,11 @@ namespace Trisolaris.Combat
     public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float weaponRange = 2f;
+        [SerializeField] float timeBetweenAttacks;
         
         Transform target;
         Mover mover;
+        float timeSinceLastAttack;
 
         private void Awake()
         {
@@ -20,6 +22,9 @@ namespace Trisolaris.Combat
 
         private void Update()
         {
+            timeSinceLastAttack += Time.deltaTime;
+            
+            
             if (target == null) return;
             if (!GetIsInRange())
             {
@@ -28,7 +33,19 @@ namespace Trisolaris.Combat
             else
             {
                 mover.Cancel();
+                AttackBehaviour();
             }
+        }
+
+        private void AttackBehaviour()
+        {
+
+            if(timeSinceLastAttack > timeBetweenAttacks)
+            {
+                GetComponent<Animator>().SetTrigger("attack");
+                timeSinceLastAttack = 0;
+            }
+            
         }
 
         private bool GetIsInRange()
@@ -46,6 +63,12 @@ namespace Trisolaris.Combat
         public void Cancel()
         {
             target = null;
+        }
+
+        // This is an animation event
+        void Hit()
+        {
+
         }
     }
 }
