@@ -10,7 +10,8 @@ namespace Trisolaris.Combat
     {
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks;
-        
+        [SerializeField] float weaponDamage = 5f;
+
         Transform target;
         Mover mover;
         float timeSinceLastAttack;
@@ -23,8 +24,8 @@ namespace Trisolaris.Combat
         private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
-            
-            
+
+
             if (target == null) return;
             if (!GetIsInRange())
             {
@@ -40,12 +41,19 @@ namespace Trisolaris.Combat
         private void AttackBehaviour()
         {
 
-            if(timeSinceLastAttack > timeBetweenAttacks)
+            if (timeSinceLastAttack > timeBetweenAttacks)
             {
+                // This will tritgger the Hit() event.
                 GetComponent<Animator>().SetTrigger("attack");
                 timeSinceLastAttack = 0;
             }
-            
+
+        }
+        // This is an animation event
+        void Hit()
+        {
+            Health healthComponent = target.GetComponent<Health>();
+            healthComponent.TakeDamage(weaponDamage);
         }
 
         private bool GetIsInRange()
@@ -65,10 +73,6 @@ namespace Trisolaris.Combat
             target = null;
         }
 
-        // This is an animation event
-        void Hit()
-        {
 
-        }
     }
 }
