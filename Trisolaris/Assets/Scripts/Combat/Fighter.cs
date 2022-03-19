@@ -47,11 +47,18 @@ namespace Trisolaris.Combat
             if (timeSinceLastAttack > timeBetweenAttacks)
             {
                 // This will tritgger the Hit() event.
-                animator.SetTrigger("attack");
+                TriggerAttack();
                 timeSinceLastAttack = 0;
             }
 
         }
+
+        private void TriggerAttack()
+        {
+            animator.ResetTrigger("stopAttacking");
+            animator.SetTrigger("attack");
+        }
+
         // This is an animation event
         void Hit()
         {
@@ -67,12 +74,18 @@ namespace Trisolaris.Combat
         {
             GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget.GetComponent<Health>();
-            Debug.Log("attack!");
+            Debug.Log("attack!");          
         }
 
         public void Cancel()
         {
             target = null;
+            StopAttack();
+        }
+
+        private void StopAttack()
+        {
+            animator.ResetTrigger("attack");
             animator.SetTrigger("stopAttacking");
         }
 
