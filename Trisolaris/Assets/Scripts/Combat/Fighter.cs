@@ -43,7 +43,7 @@ namespace Trisolaris.Combat
 
         private void AttackBehaviour()
         {
-
+            transform.LookAt(target.transform);
             if (timeSinceLastAttack > timeBetweenAttacks)
             {
                 // This will tritgger the Hit() event.
@@ -76,6 +76,11 @@ namespace Trisolaris.Combat
             animator.SetTrigger("stopAttacking");
         }
 
-
+        public bool CanAttack(CombatTarget combatTarget)
+        {
+            if (combatTarget == null) return false;
+            Health healthToTest = combatTarget.GetComponent<Health>();
+            return healthToTest != null && !healthToTest.IsDead() ;
+        }
     }
 }

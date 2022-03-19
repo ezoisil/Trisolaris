@@ -24,14 +24,14 @@ namespace Trisolaris.Control
             foreach (RaycastHit hit in hits)
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (target == null) 
+                if (!GetComponent<Fighter>().CanAttack(target)) 
                 {
                     continue;
                 }
 
                 if (Input.GetMouseButtonDown(ATTACK_BUTTON))
                 {
-                    GetComponent<Fighter>().Attack(target);                    
+                    GetComponent<Fighter>().Attack(target);
                 }else if (Input.GetMouseButton(MOVE_BUTTON))
                 {
                     GetComponent<Mover>().StartMoveAction(hit.point);
