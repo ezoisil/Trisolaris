@@ -62,6 +62,7 @@ namespace Trisolaris.Combat
         // This is an animation event
         void Hit()
         {
+            if (target == null) return;
             target.TakeDamage(weaponDamage);
         }
 
