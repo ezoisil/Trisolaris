@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Trisolaris.Combat;
+using Trisolaris.Core;
 using UnityEngine;
 
 namespace Trisolaris.Control
@@ -11,15 +12,19 @@ namespace Trisolaris.Control
 
         Fighter fighter;
         GameObject player;
+        Health health;
 
         private void Awake()
         {
             fighter = GetComponent<Fighter>();
             player = GameObject.FindWithTag("Player");
+            health = GetComponent<Health>();
         }
 
         private void Update()
         {
+            if (health.IsDead()) return;
+
             if (InAttackRangeOfPlayer()  && fighter.CanAttack(player))
             {
                 fighter.Attack(player);

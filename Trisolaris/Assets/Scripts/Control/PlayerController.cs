@@ -4,6 +4,7 @@ using UnityEngine;
 using Trisolaris.Movement;
 using System;
 using Trisolaris.Combat;
+using Trisolaris.Core;
 
 namespace Trisolaris.Control
 {
@@ -11,9 +12,17 @@ namespace Trisolaris.Control
     {
         int ATTACK_BUTTON = 1;
         int MOVE_BUTTON = 0;
-        
+        Health health;
+
+        private void Start()
+        {
+            health = GetComponent<Health>();
+        }
+
         private void Update()
         {
+            if (health.IsDead()) return;
+
             if(InteractWithCombat())return;
             if (InteractWithMovement()) return; 
         }
