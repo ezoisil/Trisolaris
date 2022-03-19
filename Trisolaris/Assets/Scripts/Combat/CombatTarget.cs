@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Trisolaris.Core;
 using UnityEngine;
 
 namespace Trisolaris.Combat

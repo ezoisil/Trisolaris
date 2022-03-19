@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Trisolaris.Combat
+namespace Trisolaris.Core
 {
     public class Health : MonoBehaviour
     {
@@ -28,6 +28,7 @@ namespace Trisolaris.Combat
         void Die()
         {
             GetComponent<Animator>().SetTrigger("die");
+            GetComponent<ActionScheduler>().CancelCurrentAction();
         }
     }
 }
