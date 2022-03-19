@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Trisolaris.Combat;
 using UnityEngine;
 
 namespace Trisolaris.Control
@@ -8,20 +9,32 @@ namespace Trisolaris.Control
     {
         [SerializeField] float chaseDistance = 5f;
 
-        private void Update()
-        {           
-            DistanceToPlayer();
+        Fighter fighter;
+        GameObject player;
 
-            if (DistanceToPlayer() < chaseDistance)
-            {
-                print(gameObject.name + ": Stop where you are!");
-            }
+        private void Awake()
+        {
+            fighter = GetComponent<Fighter>();
+            player = GameObject.FindWithTag("Player");
         }
 
-        private float DistanceToPlayer()
+        private void Update()
         {
-            GameObject player = GameObject.FindWithTag("Player");
-            return Vector3.Distance(transform.position, player.transform.position);
+            if (InAttackRangeOfPlayer()  && fighter.CanAttack(player))
+            {
+                fighter.Attack(player);
+            }
+            else
+            {
+                fighter.Cancel();
+            }
+            
+        }
+
+        private bool InAttackRangeOfPlayer()
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+            return distanceToPlayer < chaseDistance;
         }
     }
 }  
