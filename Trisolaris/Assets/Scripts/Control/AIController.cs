@@ -14,11 +14,17 @@ namespace Trisolaris.Control
         GameObject player;
         Health health;
 
+        Vector3 guardPosition;
+
         private void Awake()
         {
             fighter = GetComponent<Fighter>();
             player = GameObject.FindWithTag("Player");
             health = GetComponent<Health>();
+        }
+        private void Start()
+        {
+            guardPosition = transform.position;
         }
 
         private void Update()
