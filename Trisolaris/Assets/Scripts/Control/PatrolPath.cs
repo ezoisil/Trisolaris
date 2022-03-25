@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,10 +11,25 @@ namespace Trisolaris.Control
         {
            for(int i = 0; i < transform.childCount; i++)
             {
-                Vector3 childPosition= transform.GetChild(i).transform.position;
+                int j = GetNextIndex(i);
                 Gizmos.color = Color.red;
-                Gizmos.DrawSphere(childPosition, .2f);
-            } 
+                Gizmos.DrawSphere(GetWaypoint(i), .2f);
+                Gizmos.DrawLine(GetWaypoint(i), GetWaypoint(j));
+            }
+        }
+
+        private int GetNextIndex(int i)
+        {
+            if (i +1 >= transform.childCount)
+            {
+                return 0;
+            }
+            else return i +1;
+        }
+
+        private Vector3 GetWaypoint(int i)
+        {
+            return transform.GetChild(i).transform.position;
         }
     }
 }
