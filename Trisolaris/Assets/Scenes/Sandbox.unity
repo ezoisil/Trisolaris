@@ -1089,6 +1089,10 @@ PrefabInstance:
       propertyPath: health
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 5065586863668751741, guid: d003b410450df4c489e89af727f0df3e, type: 3}
+      propertyPath: chaseDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7001431745479966460, guid: d003b410450df4c489e89af727f0df3e, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1099,7 +1103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7001431745479966460, guid: d003b410450df4c489e89af727f0df3e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.23805285
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7001431745479966460, guid: d003b410450df4c489e89af727f0df3e, type: 3}
       propertyPath: m_LocalPosition.z
