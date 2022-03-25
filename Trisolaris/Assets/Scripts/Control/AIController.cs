@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Trisolaris.Combat;
@@ -11,15 +12,17 @@ namespace Trisolaris.Control
     {
         [SerializeField] float chaseDistance = 5f;
         [SerializeField] float suspicionTime = 4f;
+        [SerializeField] PatrolPath patrolPath;
+        [SerializeField] float wayPointTolerance = 1f;
 
         Fighter fighter;
         GameObject player;
         Health health;
         Mover mover;
-        ActionScheduler actionScheduler;
 
         Vector3 guardPosition;
         float timeSinceLastSawPlayer = Mathf.Infinity;
+        int currentWayPointIndex = 0;
         
 
         private void Awake()
@@ -28,7 +31,6 @@ namespace Trisolaris.Control
             player = GameObject.FindWithTag("Player");
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
-
         }
         private void Start()
         {
@@ -51,15 +53,44 @@ namespace Trisolaris.Control
             }
             else
             {
-                GuardBehaviour();
+                PatrolBehaviour();
             }
 
             timeSinceLastSawPlayer += Time.deltaTime;
         }
 
-        private void GuardBehaviour()
+        private void PatrolBehaviour()
         {
-            mover.StartMoveAction(guardPosition);
+            Vector3 nextPosition = guardPosition;
+            if(patrolPath != null)
+            {
+                if (AtWayPoint())
+                {
+                    CycleWayPoint(nextPosition);
+                }
+                else
+                {
+                    nextPosition = GetCurrentWayPoint();
+                }
+            }
+            mover.StartMoveAction(nextPosition);
+        }
+
+        private Vector3 GetCurrentWayPoint()
+        {
+            return patrolPath.GetWaypoint(currentWayPointIndex);
+        }
+
+        private void CycleWayPoint(Vector3 nextPosition)
+        {
+            currentWayPointIndex = patrolPath.GetNextIndex(currentWayPointIndex);
+        }
+
+        private bool AtWayPoint()
+        {
+            float distanceToWaypoint = Vector3.Distance(transform.position, GetCurrentWayPoint());
+            return (distanceToWaypoint <= wayPointTolerance);
+            
         }
 
         private void SuspicionBehaviour()
