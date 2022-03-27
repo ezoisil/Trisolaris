@@ -40,7 +40,7 @@ namespace Trisolaris.Control
                     continue;
                 }
 
-                if (Input.GetMouseButtonDown(ATTACK_BUTTON))
+                if (Input.GetMouseButton(ATTACK_BUTTON))
                 {
                     GetComponent<Fighter>().Attack(target.gameObject);
                 }else if (Input.GetMouseButton(MOVE_BUTTON))

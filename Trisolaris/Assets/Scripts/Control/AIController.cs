@@ -15,6 +15,7 @@ namespace Trisolaris.Control
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float wayPointTolerance = 1f;
 
+
         Fighter fighter;
         GameObject player;
         Health health;
@@ -22,8 +23,10 @@ namespace Trisolaris.Control
 
         Vector3 guardPosition;
         float timeSinceLastSawPlayer = Mathf.Infinity;
+        float timeAtWaypoint = Mathf.Infinity;
         int currentWayPointIndex = 0;
-        
+        float timeToWaitAtWaypoint = 6f;
+
 
         private void Awake()
         {
@@ -39,15 +42,15 @@ namespace Trisolaris.Control
 
         private void Update()
         {
-            
+
             if (health.IsDead()) return;
 
-            if (InAttackRangeOfPlayer()  && fighter.CanAttack(player))
+            if (InAttackRangeOfPlayer() && fighter.CanAttack(player))
             {
                 AttackBehaviour();
                 timeSinceLastSawPlayer = 0;
             }
-            else if (timeSinceLastSawPlayer<suspicionTime)
+            else if (timeSinceLastSawPlayer < suspicionTime)
             {
                 SuspicionBehaviour();
             }
@@ -56,7 +59,13 @@ namespace Trisolaris.Control
                 PatrolBehaviour();
             }
 
+            UpdateTimers();
+        }
+
+        private void UpdateTimers()
+        {
             timeSinceLastSawPlayer += Time.deltaTime;
+            timeAtWaypoint += Time.deltaTime;
         }
 
         private void PatrolBehaviour()
@@ -66,6 +75,7 @@ namespace Trisolaris.Control
             {
                 if (AtWayPoint())
                 {
+                    timeAtWaypoint = 0;                   
                     CycleWayPoint(nextPosition);
                 }
                 else
@@ -73,7 +83,10 @@ namespace Trisolaris.Control
                     nextPosition = GetCurrentWayPoint();
                 }
             }
-            mover.StartMoveAction(nextPosition);
+            if (timeToWaitAtWaypoint < timeAtWaypoint)
+            {
+                mover.StartMoveAction(nextPosition);
+            }            
         }
 
         private Vector3 GetCurrentWayPoint()
