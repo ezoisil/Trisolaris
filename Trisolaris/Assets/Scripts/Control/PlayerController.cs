@@ -45,7 +45,7 @@ namespace Trisolaris.Control
                     GetComponent<Fighter>().Attack(target.gameObject);
                 }else if (Input.GetMouseButton(MOVE_BUTTON))
                 {
-                    GetComponent<Mover>().StartMoveAction(hit.point);
+                    GetComponent<Mover>().StartMoveAction(hit.point, 1f);
                 }
                 return true;
             }
@@ -61,7 +61,7 @@ namespace Trisolaris.Control
             {
                 if(Input.GetMouseButton(MOVE_BUTTON) || Input.GetMouseButton(ATTACK_BUTTON))
                 {
-                    GetComponent<Mover>().StartMoveAction(hit.point);
+                    GetComponent<Mover>().StartMoveAction(hit.point,1f);
                 }
                 return true;
             }

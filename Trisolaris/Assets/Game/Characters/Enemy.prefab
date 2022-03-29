@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1741848526429195159, guid: 5f4c0e57ecff62e428c766e92a4d4b38, type: 3}
       propertyPath: health
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4083396094418073738, guid: 5f4c0e57ecff62e428c766e92a4d4b38, type: 3}
       propertyPath: m_Name
@@ -95,6 +95,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6517b9083f1cf5f4483b28292e52d4f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2404160358769190658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644285907329552158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ef1d0af7a0ed746adb286bfb91ac6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3243855179367295728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponRange: 2
   timeBetweenAttacks: 1.7
-  weaponDamage: 5
+  weaponDamage: 10
 --- !u!114 &5065586863668751741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,18 +135,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 5
---- !u!114 &2404160358769190658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644285907329552158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2ef1d0af7a0ed746adb286bfb91ac6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  suspicionTime: 4
+  patrolPath: {fileID: 0}
+  wayPointTolerance: 1
 --- !u!1001 &4354722554450987996
 PrefabInstance:
   m_ObjectHideFlags: 0

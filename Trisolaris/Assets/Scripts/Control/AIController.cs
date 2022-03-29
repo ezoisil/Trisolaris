@@ -14,6 +14,8 @@ namespace Trisolaris.Control
         [SerializeField] float suspicionTime = 4f;
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float wayPointTolerance = 1f;
+        [Range(0,1)]
+        [SerializeField] float patrolSpeedFraction = 0.2f;
 
 
         Fighter fighter;
@@ -47,8 +49,7 @@ namespace Trisolaris.Control
 
             if (InAttackRangeOfPlayer() && fighter.CanAttack(player))
             {
-                AttackBehaviour();
-                timeSinceLastSawPlayer = 0;
+                AttackBehaviour();               
             }
             else if (timeSinceLastSawPlayer < suspicionTime)
             {
@@ -85,7 +86,7 @@ namespace Trisolaris.Control
             }
             if (timeToWaitAtWaypoint < timeAtWaypoint)
             {
-                mover.StartMoveAction(nextPosition);
+                mover.StartMoveAction(nextPosition, patrolSpeedFraction);
             }            
         }
 
@@ -113,6 +114,7 @@ namespace Trisolaris.Control
 
         private void AttackBehaviour()
         {
+            timeSinceLastSawPlayer = 0;
             fighter.Attack(player);
         }
 
