@@ -2759,7 +2759,9 @@ GameObject:
   - component: {fileID: 746777494}
   - component: {fileID: 746777496}
   - component: {fileID: 746777495}
-  m_Layer: 0
+  - component: {fileID: 746777497}
+  - component: {fileID: 746777498}
+  m_Layer: 2
   m_Name: Intro Sequence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2774,7 +2776,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746777492}
   m_LocalRotation: {x: -0, y: 0.22186223, z: -0, w: 0.9750781}
-  m_LocalPosition: {x: -32.2, y: 0, z: 4.79}
+  m_LocalPosition: {x: -32.2, y: 0.76, z: 4.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 305751036}
@@ -2790,7 +2792,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: c9541e3d3d6c6794aad9949f66fb849e, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -2826,11 +2828,35 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746777492}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 3.1160338, z: 4.266738}
-  m_Center: {x: -0.0000028653008, y: 1.0580169, z: -0.6329474}
+  m_Size: {x: 1, y: 3.1160338, z: 2.6169105}
+  m_Center: {x: -0.0000037033408, y: 1.0580169, z: -0.2076972}
+--- !u!114 &746777497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746777492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7898cd4ea6289764ab08eaa54466b605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &746777498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746777492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d322d70d981ef947a47ec6ce532996f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &778111414
 PrefabInstance:
   m_ObjectHideFlags: 0
