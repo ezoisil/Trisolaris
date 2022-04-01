@@ -2177,7 +2177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6497122981028883628, guid: 5f4c0e57ecff62e428c766e92a4d4b38, type: 3}
       propertyPath: m_Radius
-      value: 0.36
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6497122981028883628, guid: 5f4c0e57ecff62e428c766e92a4d4b38, type: 3}
       propertyPath: m_Center.y
@@ -2207,6 +2207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ef1d0af7a0ed746adb286bfb91ac6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 6
 --- !u!114 &4043467932673861520
 MonoBehaviour:
   m_ObjectHideFlags: 0
