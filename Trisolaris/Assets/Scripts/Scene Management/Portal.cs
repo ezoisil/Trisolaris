@@ -12,8 +12,16 @@ namespace Trisolaris.SceneManagement
         {
             if(other.tag == "Player")
             {
-                SceneManager.LoadScene(sceneToLoad);
+                StartCoroutine(Transition());
             }
+        }
+
+        private IEnumerator Transition()
+        {
+            DontDestroyOnLoad(gameObject);
+            yield return SceneManager.LoadSceneAsync(sceneToLoad);
+            print("portal");
+            Destroy(gameObject);
         }
     }
 }
