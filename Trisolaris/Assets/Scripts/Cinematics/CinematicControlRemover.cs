@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using Trisolaris.Core;
+using Trisolaris.Control;
 
 namespace Trisolaris.Cinematics
 {
@@ -15,11 +17,14 @@ namespace Trisolaris.Cinematics
 
         void DisableControl(PlayableDirector pd)
         {
-            print("Disable Control");
+            GameObject player = GameObject.FindWithTag("Player");
+            player.GetComponent<ActionScheduler>().CancelCurrentAction();
+            player.GetComponent<PlayerController>().enabled = false;
         }
         void EnableControl(PlayableDirector pd)
         {
-            print("Enable Control");
+            GameObject player = GameObject.FindWithTag("Player");
+            player.GetComponent<PlayerController>().enabled = true;
         }
     }
 }
