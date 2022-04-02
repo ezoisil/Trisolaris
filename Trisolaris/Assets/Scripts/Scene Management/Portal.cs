@@ -54,6 +54,8 @@ namespace Trisolaris.SceneManagement
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
 
+            wrapper.Save();
+
             yield return new WaitForSeconds(waitForFadeIn);
             yield return fader.FadeIn(timeFadeIn);
 
