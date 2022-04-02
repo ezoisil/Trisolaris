@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Trisolaris.Saving;
 
 namespace Trisolaris.Core
 {
-    public class Health : MonoBehaviour
+    public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float health = 100;
         bool isDead = false;
@@ -29,6 +30,22 @@ namespace Trisolaris.Core
         {
             GetComponent<Animator>().SetTrigger("die");
             GetComponent<ActionScheduler>().CancelCurrentAction();
+        }
+
+        public object CaptureState()
+        {
+            return health;
+        }
+
+        public void RestoreState(object state)
+        {
+            health = (float)state;
+            
+            if (health == 0)
+            {
+                Die();
+                isDead = true;
+            }
         }
     }
 }

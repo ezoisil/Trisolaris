@@ -21,13 +21,13 @@ namespace Trisolaris.SceneManagement
             }
         }
 
-        private void Save()
+        public void Save()
         {
             // call to the saving system
             GetComponent<SavingSystem>().Save(defaultSaveFile);
         }
 
-        private void Load()
+        public void Load()
         {
             // call to the saving system
             GetComponent<SavingSystem>().Load(defaultSaveFile);
