@@ -17,6 +17,9 @@ namespace Trisolaris.SceneManagement
         [SerializeField] int sceneToLoad = -1;
         [SerializeField] Transform spawnPoint;
         [SerializeField] DestinationIdentifier destination;
+        [SerializeField] float timeFadeOut = 3f;
+        [SerializeField] float timeFadeIn = 1f;
+        [SerializeField] float waitForFadeIn = 1f;
 
 
         private void OnTriggerEnter(Collider other)
@@ -29,12 +32,24 @@ namespace Trisolaris.SceneManagement
 
         private IEnumerator Transition()
         {
-            DontDestroyOnLoad(gameObject);
-            yield return SceneManager.LoadSceneAsync(sceneToLoad);
+            if (sceneToLoad < 0)
+            {
+                Debug.LogError("Scene to load not set");
+                yield break;
+            }
 
+            DontDestroyOnLoad(gameObject);
+
+            Fader fader = FindObjectOfType<Fader>();
+
+            yield return fader.FadeOut(timeFadeOut);
+            yield return SceneManager.LoadSceneAsync(sceneToLoad);
+            
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
 
+            yield return new WaitForSeconds(waitForFadeIn);
+            yield return fader.FadeIn(timeFadeIn);
 
             Destroy(gameObject);
         }
