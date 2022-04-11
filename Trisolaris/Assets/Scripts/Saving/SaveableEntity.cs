@@ -7,6 +7,7 @@ using UnityEngine.AI;
 
 namespace Trisolaris.Saving
 {
+    // Makes it work even in edit mode.
     [ExecuteAlways]
     public class SaveableEntity : MonoBehaviour
     {
@@ -64,6 +65,8 @@ namespace Trisolaris.Saving
         }
 #endif
 
+        // We do it with a dictionary so that it is fast and efficient. It is okay to call it every frame. Otherwise we would need to use a FindObjectsOfType
+        // and that would be expensive.
         private bool IsUnique(string candidate)
         {
             if (!globalLookup.ContainsKey(candidate)) return true;
