@@ -6,6 +6,7 @@ namespace Trisolaris.SceneManagement
 {
     public class Fader : MonoBehaviour
     {
+        // With canvas group we can controll all of the components under a canvas.
         CanvasGroup canvasGroup;
 
         private void Awake()
@@ -17,6 +18,7 @@ namespace Trisolaris.SceneManagement
         {
             while (canvasGroup.alpha < 1)
             {
+                // Time.deltaTime/time makes it run every frame in a smooth way
                 canvasGroup.alpha += Time.deltaTime / time;
                 yield return null;
             }          

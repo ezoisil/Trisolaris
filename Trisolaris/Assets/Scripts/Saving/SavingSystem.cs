@@ -11,6 +11,7 @@ namespace Trisolaris.Saving
 {
     public class SavingSystem : MonoBehaviour
     {
+
         public IEnumerator LoadLastScene(string saveFile)
         {
             Dictionary<string, object> state = LoadFile(saveFile);
@@ -47,6 +48,7 @@ namespace Trisolaris.Saving
             {
                 return new Dictionary<string, object>();
             }
+            // "using" statement will close stream as soon as you leave the block, this way you can avoid the risk of not closing the stream and memory leakage. 
             using (FileStream stream = File.Open(path, FileMode.Open))
             {
                 BinaryFormatter formatter = new BinaryFormatter();

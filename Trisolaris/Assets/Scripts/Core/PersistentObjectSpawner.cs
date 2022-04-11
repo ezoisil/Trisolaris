@@ -18,10 +18,12 @@ namespace Trisolaris.Core
 
         }
 
+        // This is used to avoid using singletons. 
         private void SpawnPersistentObjects()
         {
             GameObject persistentObject = Instantiate(persistentObjectPrefab);
             DontDestroyOnLoad(persistentObject);
+            hasSpawned = true;
         }
     }
 }
