@@ -38,6 +38,7 @@ namespace Trisolaris.SceneManagement
                 yield break;
             }
 
+            // We keep the portal so that we can acsess the data on it. Once the transition ends, then we can destroy it.
             DontDestroyOnLoad(gameObject);
 
             Fader fader = FindObjectOfType<Fader>();
@@ -62,6 +63,7 @@ namespace Trisolaris.SceneManagement
             Destroy(gameObject);
         }
 
+        // Looks over each portal on the next scene to see which one matches our destination.
         private Portal GetOtherPortal()
         {
             foreach(Portal portal in FindObjectsOfType<Portal>())
