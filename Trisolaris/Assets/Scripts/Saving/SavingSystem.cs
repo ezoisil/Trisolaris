@@ -11,7 +11,7 @@ namespace Trisolaris.Saving
 {
     public class SavingSystem : MonoBehaviour
     {
-
+        // This is a coroutine because loading takes time.
         public IEnumerator LoadLastScene(string saveFile)
         {
             Dictionary<string, object> state = LoadFile(saveFile);
