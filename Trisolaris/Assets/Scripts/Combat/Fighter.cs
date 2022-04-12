@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Trisolaris.Core;
@@ -11,6 +12,8 @@ namespace Trisolaris.Combat
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks;
         [SerializeField] float weaponDamage = 5f;
+        [SerializeField] GameObject weaponPrefab = null;
+        [SerializeField] Transform handTransform = null;
 
         Health target;
         Mover mover;
@@ -21,6 +24,11 @@ namespace Trisolaris.Combat
         {
             mover = GetComponent<Mover>();
             animator = GetComponent<Animator>();
+        }
+
+        private void Start()
+        {
+            SpawnWeapon();
         }
 
         private void Update()
@@ -39,6 +47,11 @@ namespace Trisolaris.Combat
                 mover.Cancel();
                 AttackBehaviour();
             }
+        }
+
+        private void SpawnWeapon()
+        {
+                Instantiate(weaponPrefab, handTransform);
         }
 
         private void AttackBehaviour()
