@@ -12,9 +12,9 @@ namespace Trisolaris.Combat
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks;
         [SerializeField] float weaponDamage = 5f;
-        [SerializeField] GameObject weaponPrefab = null;
         [SerializeField] Transform handTransform = null;
-        [SerializeField] AnimatorOverrideController weaponOverride = null;
+        [SerializeField] Weapon weapon = null;
+
 
         Health target;
         Mover mover;
@@ -32,6 +32,7 @@ namespace Trisolaris.Combat
             SpawnWeapon();
         }
 
+      
         private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
@@ -49,11 +50,10 @@ namespace Trisolaris.Combat
                 AttackBehaviour();
             }
         }
-
         private void SpawnWeapon()
         {
-            Instantiate(weaponPrefab, handTransform);
-            animator.runtimeAnimatorController = weaponOverride;
+            if (weapon == null) return;
+            weapon.Spawn(handTransform, animator);
         }
 
         private void AttackBehaviour()
