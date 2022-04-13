@@ -2241,3 +2241,4 @@ MonoBehaviour:
   weaponDamage: 10
   weaponPrefab: {fileID: 6596442350708239222, guid: 2339bb2c6a92a3840a46be5f0c3d1735, type: 3}
   handTransform: {fileID: 2550784023310761833}
+  weaponOverride: {fileID: 22100000, guid: 8a26a8e9b7fe22e41ac9a9ac367c4ead, type: 2}

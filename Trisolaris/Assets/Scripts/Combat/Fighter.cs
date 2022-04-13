@@ -14,6 +14,7 @@ namespace Trisolaris.Combat
         [SerializeField] float weaponDamage = 5f;
         [SerializeField] GameObject weaponPrefab = null;
         [SerializeField] Transform handTransform = null;
+        [SerializeField] AnimatorOverrideController weaponOverride = null;
 
         Health target;
         Mover mover;
@@ -51,7 +52,8 @@ namespace Trisolaris.Combat
 
         private void SpawnWeapon()
         {
-                Instantiate(weaponPrefab, handTransform);
+            Instantiate(weaponPrefab, handTransform);
+            animator.runtimeAnimatorController = weaponOverride;
         }
 
         private void AttackBehaviour()
