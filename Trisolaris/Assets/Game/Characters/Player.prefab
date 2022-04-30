@@ -2236,9 +2236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a65008e05e4007c42bbf1efd32199fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponRange: 1.65
   timeBetweenAttacks: 1.1
-  weaponDamage: 10
-  weaponPrefab: {fileID: 6596442350708239222, guid: 2339bb2c6a92a3840a46be5f0c3d1735, type: 3}
   handTransform: {fileID: 2550784023310761833}
-  weaponOverride: {fileID: 22100000, guid: 8a26a8e9b7fe22e41ac9a9ac367c4ead, type: 2}
+  weapon: {fileID: 11400000, guid: 2564472fe1b7654449118273bda72cf0, type: 2}
