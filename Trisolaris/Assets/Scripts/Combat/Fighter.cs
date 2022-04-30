@@ -11,13 +11,14 @@ namespace Trisolaris.Combat
     {
         [SerializeField] float timeBetweenAttacks;
         [SerializeField] Transform handTransform = null;
-        [SerializeField] Weapon weapon = null;
+        [SerializeField] Weapon defaultWeapon = null;
 
-
+        
         Health target;
         Mover mover;
         float timeSinceLastAttack;
         Animator animator;
+        Weapon currentWeapon = null;
 
         private void Awake()
         {
@@ -27,7 +28,7 @@ namespace Trisolaris.Combat
 
         private void Start()
         {
-            SpawnWeapon();
+            EquipWeapon(defaultWeapon);
         }
 
       
@@ -48,10 +49,10 @@ namespace Trisolaris.Combat
                 AttackBehaviour();
             }
         }
-        private void SpawnWeapon()
+        public void EquipWeapon(Weapon weapon)
         {
-            if (weapon == null) return;
-            weapon.Spawn(handTransform, animator);
+            currentWeapon = weapon;
+            currentWeapon.Spawn(handTransform, animator);
         }
 
         private void AttackBehaviour()
@@ -76,12 +77,12 @@ namespace Trisolaris.Combat
         void Hit()
         {
             if (target == null) return;
-            target.TakeDamage(weapon.GetDamage());
+            target.TakeDamage(currentWeapon.GetDamage());
         }
 
         private bool GetIsInRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) < weapon.GetRange();
+            return Vector3.Distance(transform.position, target.transform.position) < currentWeapon.GetRange();
         }
 
         public void Attack(GameObject combatTarget)
