@@ -10,7 +10,8 @@ namespace Trisolaris.Combat
     public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float timeBetweenAttacks;
-        [SerializeField] Transform handTransform = null;
+        [SerializeField] Transform rightHandTransform = null;
+        [SerializeField] Transform leftHandTransform = null;
         [SerializeField] Weapon defaultWeapon = null;
 
         
@@ -52,7 +53,7 @@ namespace Trisolaris.Combat
         public void EquipWeapon(Weapon weapon)
         {
             currentWeapon = weapon;
-            currentWeapon.Spawn(handTransform, animator);
+            currentWeapon.Spawn(rightHandTransform,leftHandTransform, animator);
         }
 
         private void AttackBehaviour()
