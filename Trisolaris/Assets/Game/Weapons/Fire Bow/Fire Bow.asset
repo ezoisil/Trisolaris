@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7fcc4d2ec882545bc9b9f3f620e7b4, type: 3}
   m_Name: Fire Bow
   m_EditorClassIdentifier: 
-  animatorOverride: {fileID: 22100000, guid: 9f047cf6d59ab584980ef20b093259fe, type: 2}
-  equippedPrefab: {fileID: 5239970649466846170, guid: a9670ca933685f24d8ef577558b02f54, type: 3}
-  weaponDamage: 12
-  weaponRange: 7
+  animatorOverride: {fileID: 22100000, guid: fbb8b4b6fa014ea4a85da3dc5a01aac5, type: 2}
+  equippedPrefab: {fileID: 5239970649466846170, guid: 1168a050f2f2a2d4f92147896d8a49c0, type: 3}
+  weaponDamage: 13
+  weaponRange: 6
   isRightHanded: 0
   projectile: {fileID: 1440499974584454268, guid: 0b2f82b33cc23f1439a8ded60a61435a, type: 3}
