@@ -10,8 +10,8 @@ namespace Trisolaris.Combat
     {
     
         [SerializeField] float speed = 1f;
-
         private Health target = null;
+        float damage = 0;
 
 
         private void Awake()
@@ -41,9 +41,18 @@ namespace Trisolaris.Combat
             
         }
 
-        public void SetTarget(Health target)
+        public void SetTarget(Health target, float damage)
         {
             this.target = target;
+            this.damage = damage;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.GetComponent<Health>() != target) { return; }           
+            target.TakeDamage(damage);
+            Destroy(gameObject);
+            
         }
     }
 }

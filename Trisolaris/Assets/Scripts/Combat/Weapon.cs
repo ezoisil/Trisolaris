@@ -15,6 +15,7 @@ namespace Trisolaris.Combat
         [SerializeField] float weaponRange = 2f;
         [SerializeField] bool isRightHanded = true;
         [SerializeField] Projectile projectile = null;
+        
 
         public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
@@ -52,7 +53,7 @@ namespace Trisolaris.Combat
         public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
         {
             Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetTarget(target);          
+            projectileInstance.SetTarget(target, weaponDamage);          
         }
         
         public float GetDamage()
