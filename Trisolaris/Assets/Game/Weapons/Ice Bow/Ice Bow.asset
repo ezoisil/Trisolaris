@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7fcc4d2ec882545bc9b9f3f620e7b4, type: 3}
+  m_Name: Ice Bow
+  m_EditorClassIdentifier: 
+  animatorOverride: {fileID: 22100000, guid: 9f047cf6d59ab584980ef20b093259fe, type: 2}
+  equippedPrefab: {fileID: 5239970649466846170, guid: a9670ca933685f24d8ef577558b02f54, type: 3}
+  weaponDamage: 12
+  weaponRange: 7
+  isRightHanded: 0
+  projectile: {fileID: 1440499974584454268, guid: 0b2f82b33cc23f1439a8ded60a61435a, type: 3}

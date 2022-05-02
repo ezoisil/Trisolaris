@@ -2239,4 +2239,4 @@ MonoBehaviour:
   timeBetweenAttacks: 1.1
   rightHandTransform: {fileID: 2550784023310761833}
   leftHandTransform: {fileID: 4285377298584909315}
-  defaultWeapon: {fileID: 11400000, guid: 876d89b759922f242bafafba54e3a476, type: 2}
+  defaultWeapon: {fileID: 11400000, guid: 30a7798b5cd14794ba8ebd23b0ac5bb7, type: 2}
