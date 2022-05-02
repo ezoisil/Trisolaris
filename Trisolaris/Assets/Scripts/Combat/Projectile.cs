@@ -1,19 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Trisolaris.Core;
 using UnityEngine;
 
 namespace Trisolaris.Combat
 {
     public class Projectile : MonoBehaviour
     {
-        private Transform target = null;
-
+    
         [SerializeField] float speed = 1f;
+
+        private Health target = null;
+
 
         private void Awake()
         {
-            target = GameObject.FindGameObjectWithTag("Player").transform;
+            
         }
         void Start()
         {
@@ -32,10 +35,15 @@ namespace Trisolaris.Combat
             CapsuleCollider targetCapsule = target.GetComponent<CapsuleCollider>();
             if (targetCapsule == null)
             {
-                return target.position;
+                return target.transform.position;
             }
-            return target.position + Vector3.up * targetCapsule.height / 2;
+            return target.transform.position + Vector3.up * targetCapsule.height / 2;
+            
+        }
 
+        public void SetTarget(Health target)
+        {
+            this.target = target;
         }
     }
 }

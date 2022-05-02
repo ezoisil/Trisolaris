@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Trisolaris.Core;
 using UnityEngine;
 
 namespace Trisolaris.Combat
@@ -13,20 +14,13 @@ namespace Trisolaris.Combat
         [SerializeField] float weaponDamage = 5f;
         [SerializeField] float weaponRange = 2f;
         [SerializeField] bool isRightHanded = true;
+        [SerializeField] Projectile projectile = null;
 
         public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
             if (equippedPrefab != null)
             {
-                Transform handTransform;
-                if (isRightHanded)
-                {
-                    handTransform = rightHand;
-                }
-                else
-                {
-                    handTransform = leftHand;
-                }
+                Transform handTransform = GetTransform(rightHand, leftHand);
                 Instantiate(equippedPrefab, handTransform);
             }
             if (animatorOverride != null)
@@ -35,6 +29,32 @@ namespace Trisolaris.Combat
             }
         }
 
+        private Transform GetTransform(Transform rightHand, Transform leftHand)
+        {
+            Transform handTransform;
+            if (isRightHanded)
+            {
+                handTransform = rightHand;
+            }
+            else
+            {
+                handTransform = leftHand;
+            }
+
+            return handTransform;
+        }
+
+        public bool HasProjectile()
+        {
+            return projectile != null;
+        }
+
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
+        {
+            Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand).position, Quaternion.identity);
+            projectileInstance.SetTarget(target);          
+        }
+        
         public float GetDamage()
         {
             return weaponDamage; 
