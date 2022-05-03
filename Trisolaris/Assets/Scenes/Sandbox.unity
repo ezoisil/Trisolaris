@@ -7374,18 +7374,18 @@ PrefabInstance:
     - target: {fileID: 436470707901492247, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
       propertyPath: defaultWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 876d89b759922f242bafafba54e3a476, type: 2}
+      objectReference: {fileID: 11400000, guid: 25513dd83622b5e4588cceb21c55b2de, type: 2}
     - target: {fileID: 7889841108318984383, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -31.640697
+      value: -33.640656
       objectReference: {fileID: 0}
     - target: {fileID: 7889841108318984383, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4330633
+      value: -0.27935505
       objectReference: {fileID: 0}
     - target: {fileID: 7889841108318984383, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.017187
+      value: 18.099598
       objectReference: {fileID: 0}
     - target: {fileID: 7889841108318984383, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7461,15 +7461,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7889841109241871222, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -31.640697
+      value: -33.640656
       objectReference: {fileID: 0}
     - target: {fileID: 7889841109241871222, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4330633
+      value: -0.27935505
       objectReference: {fileID: 0}
     - target: {fileID: 7889841109241871222, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.017187
+      value: 18.099598
       objectReference: {fileID: 0}
     - target: {fileID: 7889841109241871222, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7497,7 +7497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7889841109712147561, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
       propertyPath: m_CameraDistance
-      value: 5
+      value: 7.55
       objectReference: {fileID: 0}
     - target: {fileID: 7889841109712147561, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
       propertyPath: m_TrackedObjectOffset.x
