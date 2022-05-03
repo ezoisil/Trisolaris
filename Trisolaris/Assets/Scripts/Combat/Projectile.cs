@@ -10,23 +10,27 @@ namespace Trisolaris.Combat
     {
     
         [SerializeField] float speed = 1f;
+        [SerializeField] bool isHoming = true;
+        [SerializeField] float destructionTime = 15f;
         private Health target = null;
         float damage = 0;
+       
 
 
-        private void Awake()
-        {
-            
-        }
         void Start()
         {
-       
+            transform.LookAt(GetAimLocation());
+            StartCoroutine(DestroyInTime(destructionTime));
         }
 
         void Update()
         {
             if (target == null) { Destroy(gameObject); }
-            transform.LookAt(GetAimLocation());
+
+            if (isHoming && !target.IsDead()) 
+            {
+                transform.LookAt(GetAimLocation());
+            }
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
         }
 
@@ -49,10 +53,15 @@ namespace Trisolaris.Combat
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.GetComponent<Health>() != target) { return; }           
+            if(other.GetComponent<Health>() != target) return; 
+            if (target.IsDead()) return;
             target.TakeDamage(damage);
-            Destroy(gameObject);
-            
+            Destroy(gameObject);     
+        }
+
+        IEnumerator DestroyInTime(float destructionTime)
+        {
+            yield return new WaitForSeconds(destructionTime);
         }
     }
 }
