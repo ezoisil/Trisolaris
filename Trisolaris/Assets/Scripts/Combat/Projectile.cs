@@ -11,7 +11,11 @@ namespace Trisolaris.Combat
     
         [SerializeField] float speed = 1f;
         [SerializeField] bool isHoming = true;
-        [SerializeField] float destructionTime = 15f;
+        [SerializeField] float lifeTime = 15f;
+        [SerializeField] GameObject hitEffect = null;
+        [SerializeField] GameObject[] destroyOnHit = null;
+        [SerializeField] float lifeAfterImpact = .2f;
+
         private Health target = null;
         float damage = 0;
        
@@ -20,7 +24,7 @@ namespace Trisolaris.Combat
         void Start()
         {
             transform.LookAt(GetAimLocation());
-            StartCoroutine(DestroyInTime(destructionTime));
+            StartCoroutine(DestroyInTime(lifeTime));
         }
 
         void Update()
@@ -56,12 +60,27 @@ namespace Trisolaris.Combat
             if(other.GetComponent<Health>() != target) return; 
             if (target.IsDead()) return;
             target.TakeDamage(damage);
-            Destroy(gameObject);     
+
+            speed = 0;
+
+            if(hitEffect != null)
+            {
+                Instantiate(hitEffect, GetAimLocation(), transform.rotation);
+
+            }
+
+            foreach(GameObject toDestroy in destroyOnHit)
+            {
+                Destroy(toDestroy);
+            }
+
+            Destroy(gameObject, lifeAfterImpact);
         }
 
-        IEnumerator DestroyInTime(float destructionTime)
+        IEnumerator DestroyInTime(float lifeTime)
         {
-            yield return new WaitForSeconds(destructionTime);
+            yield return new WaitForSeconds(lifeTime);
+            Destroy(gameObject);
         }
     }
 }

@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3201690809226491796, guid: 6253347068088da4d988410f9368515d, type: 3}
       propertyPath: m_Name
-      value: FlamingArrowProjectile
+      value: Fire Arrow Projectile
       objectReference: {fileID: 0}
     - target: {fileID: 4138977118368765416, guid: 6253347068088da4d988410f9368515d, type: 3}
       propertyPath: m_MotionVectors
@@ -126,6 +126,14 @@ PrefabInstance:
     - target: {fileID: 4138977118368765416, guid: 6253347068088da4d988410f9368515d, type: 3}
       propertyPath: m_Parameters.colorGradient.m_NumColorKeys
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769793319113948819, guid: 6253347068088da4d988410f9368515d, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 1537131148528536193, guid: 08a4a8461b73c7d40938bebd73a676ec, type: 3}
+    - target: {fileID: 8769793319113948819, guid: 6253347068088da4d988410f9368515d, type: 3}
+      propertyPath: lifeAfterImpact
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6253347068088da4d988410f9368515d, type: 3}
