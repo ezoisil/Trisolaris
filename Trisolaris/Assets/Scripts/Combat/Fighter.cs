@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Trisolaris.Core;
 using Trisolaris.Movement;
+using Trisolaris.Saving;
 using UnityEngine;
 
 namespace Trisolaris.Combat
 {
-    public class Fighter : MonoBehaviour, IAction
+    public class Fighter : MonoBehaviour, IAction, ISaveable
     {
         [SerializeField] float timeBetweenAttacks;
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
         [SerializeField] Weapon defaultWeapon = null;
-        [SerializeField] string defaultWeaponName = "Unarmed";
 
         
         Health target;
@@ -29,9 +29,11 @@ namespace Trisolaris.Combat
         }
 
         private void Start()
-        {
-            Weapon weapon = Resources.Load<Weapon>(defaultWeaponName);
-            EquipWeapon(weapon);
+        {          
+            if(currentWeapon == null)
+            {
+                EquipWeapon(defaultWeapon);
+            }
         }
 
       
@@ -127,6 +129,17 @@ namespace Trisolaris.Combat
             if (combatTarget == null) return false;
             Health healthToTest = combatTarget.GetComponent<Health>();
             return healthToTest != null && !healthToTest.IsDead() ;
+        }
+
+        public object CaptureState()
+        {
+            return currentWeapon.name;
+        }
+
+        public void RestoreState(object state)
+        {
+            Weapon weapon = Resources.Load<Weapon>((string)state);
+            currentWeapon = weapon;
         }
     }
 }
