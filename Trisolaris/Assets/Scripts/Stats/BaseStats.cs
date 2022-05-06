@@ -9,5 +9,6 @@ namespace Trisolaris.Stats
         [Range(1f, 100f)]
         [SerializeField] int startingLevel = 1;
         [SerializeField] CharacterClass characterClass;
+        [SerializeField] Progression progression = null;
     }
 }
