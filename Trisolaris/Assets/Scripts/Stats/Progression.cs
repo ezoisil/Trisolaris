@@ -6,21 +6,29 @@ namespace Trisolaris.Stats
     [CreateAssetMenu(fileName = "Progression", menuName = "Stats/New Progression")]
     public class Progression : ScriptableObject
     {
-        [SerializeField] ProgressionCharacterClass[] characterClass = null;
+        [SerializeField] ProgressionCharacterClass[] progressionCharacterClass = null;
+
+        public float GetHealth(CharacterClass characterClass, int level)
+        {
+            foreach(ProgressionCharacterClass character in progressionCharacterClass)
+            {
+                if(character.characterClass == characterClass)
+                {
+                    return character.health[level-1];
+                }
+            }
+            return 0;
+        }
 
 
         [System.Serializable]
         class ProgressionCharacterClass
         {
-            [SerializeField] CharacterClass characterClass;
-            [SerializeField] ProgressionHealth[] healthLevel;
+            public CharacterClass characterClass;
+            public float[] health;
         }
 
-        [System.Serializable]
-        class ProgressionHealth
-        {
-            [SerializeField] float health;
-        }
+       
 
     }
 }

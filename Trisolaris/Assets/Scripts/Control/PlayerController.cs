@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Trisolaris.Movement;
-using System;
 using Trisolaris.Combat;
-using Trisolaris.Core;
+using Trisolaris.Attributes;
 
 namespace Trisolaris.Control
 {

@@ -1,6 +1,6 @@
 ﻿namespace Trisolaris.Stats
 {
-    enum CharacterClass
+    public enum CharacterClass
     {
         Player,
         Grunt,

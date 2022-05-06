@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Trisolaris.Attributes;
 using Trisolaris.Core;
 using Trisolaris.Movement;
 using Trisolaris.Saving;

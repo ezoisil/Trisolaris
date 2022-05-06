@@ -1,20 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Trisolaris.Saving;
+using Trisolaris.Stats;
+using Trisolaris.Core;
 
-namespace Trisolaris.Core
+namespace Trisolaris.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] float health = 100;
+        [SerializeField] float healthPoints = 100;
         bool isDead = false;
+
+        private void Start()
+        {
+            healthPoints = GetComponent<BaseStats>().GetHealth();
+        }
 
         public void TakeDamage(float damage)
         {
             if (isDead) return;
-            health = Mathf.Max(health - damage, 0);
-            if(health == 0)
+            healthPoints = Mathf.Max(healthPoints - damage, 0);
+            if(healthPoints == 0)
             {
                 Die();
                 isDead = true;
@@ -34,14 +39,14 @@ namespace Trisolaris.Core
 
         public object CaptureState()
         {
-            return health;
+            return healthPoints;
         }
 
         public void RestoreState(object state)
         {
-            health = (float)state;
+            healthPoints = (float)state;
             
-            if (health == 0)
+            if (healthPoints == 0)
             {
                 Die();
                 isDead = true;
