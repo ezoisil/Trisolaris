@@ -15,27 +15,37 @@ namespace Trisolaris.Attributes
             healthPoints = GetComponent<BaseStats>().GetHealth();
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(GameObject instigator, float damage)
         {
             if (isDead) return;
             healthPoints = Mathf.Max(healthPoints - damage, 0);
             if(healthPoints == 0)
             {
                 Die();
-                isDead = true;
+                AwardExperience(instigator);
             }
 
         }
 
-        public bool IsDead()
-        {
-            return isDead;
-        }
-        void Die()
+       
+       
+        private void Die()
         {
             GetComponent<Animator>().SetTrigger("die");
             GetComponent<ActionScheduler>().CancelCurrentAction();
+            isDead = true;
+
         }
+        private void AwardExperience(GameObject instigator)
+        {
+            Experience experience = instigator.GetComponent<Experience>();
+            if (experience == null) return;  
+            
+            experience.GainExperience(GetComponent<BaseStats>().GetExperienceReward());
+            
+
+        }
+
 
         public object CaptureState()
         {
@@ -51,6 +61,10 @@ namespace Trisolaris.Attributes
                 Die();
                 isDead = true;
             }
+        }
+        public bool IsDead()
+        {
+            return isDead;
         }
 
         public float GetPercentage()

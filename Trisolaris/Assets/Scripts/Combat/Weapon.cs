@@ -15,7 +15,7 @@ namespace Trisolaris.Combat
         [SerializeField] Projectile projectile = null;
 
         const string weaponName = "Weapon";
-        
+
 
         public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
@@ -76,10 +76,10 @@ namespace Trisolaris.Combat
             return projectile != null;
         }
 
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator)
         {
             Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetTarget(target, weaponDamage);          
+            projectileInstance.SetTarget(target, weaponDamage,instigator);          
         }
         
         public float GetDamage()

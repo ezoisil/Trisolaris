@@ -16,7 +16,7 @@ namespace Trisolaris.Combat
 
         private Health target = null;
         float damage = 0;
-       
+        GameObject instigator = null;
 
 
         void Start()
@@ -47,17 +47,18 @@ namespace Trisolaris.Combat
             
         }
 
-        public void SetTarget(Health target, float damage)
+        public void SetTarget(Health target, float damage, GameObject instigator)
         {
             this.target = target;
             this.damage = damage;
+            this.instigator = instigator;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if(other.GetComponent<Health>() != target) return; 
             if (target.IsDead()) return;
-            target.TakeDamage(damage);
+            target.TakeDamage(instigator,damage);
 
             speed = 0;
 

@@ -114,7 +114,6 @@ GameObject:
   - component: {fileID: 5131165307828082882}
   - component: {fileID: 1345093014145291166}
   - component: {fileID: 3053111586384931278}
-  - component: {fileID: 693685801403987078}
   - component: {fileID: 8395309647685003864}
   m_Layer: 0
   m_Name: 'Enemy Text '
@@ -184,18 +183,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 100%
---- !u!114 &693685801403987078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709862077822017356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a109a44875999469fc8ff60239975a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8395309647685003864
 MonoBehaviour:
   m_ObjectHideFlags: 0
