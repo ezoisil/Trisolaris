@@ -12,16 +12,12 @@ namespace Trisolaris.Stats
         [SerializeField] Progression progression = null;
 
 
-        public float GetHealth()
+        public float GetStat(Stat stat)
         {
-            return progression.GetHealth(characterClass, startingLevel);
+            return progression.GetStat(characterClass,stat ,startingLevel);
         }
 
-        public float GetExperienceReward()
-        {
-            return 10;
-        }
-
+   
 
     }
 

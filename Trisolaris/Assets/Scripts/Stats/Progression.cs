@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 namespace Trisolaris.Stats
 {
     [CreateAssetMenu(fileName = "Progression", menuName = "Stats/New Progression")]
@@ -12,16 +11,19 @@ namespace Trisolaris.Stats
         {
             foreach(ProgressionCharacterClass character in progressionCharacterClass)
             {
-                if(character.characterClass == characterClass)
-                {
+                if (character.characterClass != characterClass) continue;
+                
                     foreach(ProgressionStat progressionStat in character.stats)
                     {
-                        if (stat == progressionStat.stat)
-                        {
-                            return progressionStat.levels[level - 1];
-                        }
+                    
+                    if (stat != progressionStat.stat) continue;                        
+                    
+                    if(progressionStat.levels.Length < level ) continue;
+
+                    return progressionStat.levels[level - 1];
+                        
                     }
-                }
+                
             }
             Debug.LogError("no character match");
             return 0;
