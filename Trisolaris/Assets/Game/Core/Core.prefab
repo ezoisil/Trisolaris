@@ -439,6 +439,10 @@ PrefabInstance:
       propertyPath: defaultWeapon
       value: 
       objectReference: {fileID: 11400000, guid: 25513dd83622b5e4588cceb21c55b2de, type: 2}
+    - target: {fileID: 8921515084030648065, guid: 0d8a6e805cbe4e24b93d264c9f50fe14, type: 3}
+      propertyPath: healthPoints
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d8a6e805cbe4e24b93d264c9f50fe14, type: 3}
 --- !u!4 &6911974898423309863 stripped

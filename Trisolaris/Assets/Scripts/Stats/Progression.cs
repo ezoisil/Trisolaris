@@ -8,13 +8,19 @@ namespace Trisolaris.Stats
     {
         [SerializeField] ProgressionCharacterClass[] progressionCharacterClass = null;
 
-        public float GetHealth(CharacterClass characterClass, int level)
+        public float GetStat(CharacterClass characterClass,Stat stat ,int level)
         {
             foreach(ProgressionCharacterClass character in progressionCharacterClass)
             {
                 if(character.characterClass == characterClass)
                 {
-                    return character.health[level-1];
+                    foreach(ProgressionStat progressionStat in character.stats)
+                    {
+                        if (stat == progressionStat.stat)
+                        {
+                            return progressionStat.levels[level - 1];
+                        }
+                    }
                 }
             }
             Debug.LogError("no character match");
@@ -26,10 +32,15 @@ namespace Trisolaris.Stats
         class ProgressionCharacterClass
         {
             public CharacterClass characterClass;
-            public float[] health;
+            public ProgressionStat[] stats;
         }
 
-       
+        [System.Serializable]
+        class ProgressionStat
+        {
+            public float[] levels;
+            public Stat stat;
+        }
 
     }
 }

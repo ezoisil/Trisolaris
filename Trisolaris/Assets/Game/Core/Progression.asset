@@ -18,10 +18,10 @@ MonoBehaviour:
     - 100
   - characterClass: 1
     health:
-    - 100
+    - 50
   - characterClass: 2
     health:
-    - 100
+    - 50
   - characterClass: 3
     health:
-    - 100
+    - 50

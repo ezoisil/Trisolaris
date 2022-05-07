@@ -7371,14 +7371,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1635314762386171096, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
-      propertyPath: healthPoints
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4489941031199864685, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
-      propertyPath: progression
-      value: 
-      objectReference: {fileID: 11400000, guid: 91680f52377f260438f88f4d51d8ec06, type: 2}
     - target: {fileID: 7889841108743420866, guid: 5df3faeee03831a48b32476ca2374772, type: 3}
       propertyPath: m_RootOrder
       value: 0
