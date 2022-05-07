@@ -52,5 +52,10 @@ namespace Trisolaris.Attributes
                 isDead = true;
             }
         }
+
+        public float GetPercentage()
+        {
+            return (healthPoints / GetComponent<BaseStats>().GetHealth()) * 100;
+        }
     }
 }

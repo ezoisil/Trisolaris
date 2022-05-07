@@ -17,6 +17,7 @@ namespace Trisolaris.Stats
                     return character.health[level-1];
                 }
             }
+            Debug.LogError("no character match");
             return 0;
         }
 
