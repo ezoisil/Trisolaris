@@ -142,5 +142,10 @@ namespace Trisolaris.Combat
             Weapon weapon = Resources.Load<Weapon>((string)state);
             currentWeapon = weapon;
         }
+
+        public Health GetTarget()
+        {
+            return target;
+        }
     }
 }
