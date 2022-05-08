@@ -47,6 +47,14 @@ namespace Trisolaris.Stats
 
         }
 
+        public int GetLevels(CharacterClass characterClass, Stat stat)
+        {
+            BuildLookup();
+
+            float[] levels = lookupTable[characterClass][stat];
+            return levels.Length;
+        }
+
         [System.Serializable]
         class ProgressionCharacterClass
         {

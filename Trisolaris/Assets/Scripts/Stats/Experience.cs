@@ -1,7 +1,7 @@
 using Trisolaris.Saving;
 using UnityEngine;
 
-namespace Trisolaris.Attributes
+namespace Trisolaris.Stats
 {
     public class Experience : MonoBehaviour, ISaveable
     {

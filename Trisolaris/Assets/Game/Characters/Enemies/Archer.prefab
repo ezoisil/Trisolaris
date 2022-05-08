@@ -8,12 +8,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 38606099713601462, guid: d003b410450df4c489e89af727f0df3e, type: 3}
+      propertyPath: progression
+      value: 
+      objectReference: {fileID: 11400000, guid: 91680f52377f260438f88f4d51d8ec06, type: 2}
+    - target: {fileID: 38606099713601462, guid: d003b410450df4c489e89af727f0df3e, type: 3}
       propertyPath: characterClass
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 644285907329552158, guid: d003b410450df4c489e89af727f0df3e, type: 3}
       propertyPath: m_Name
-      value: Archor
+      value: Archer
       objectReference: {fileID: 0}
     - target: {fileID: 3243855179367295728, guid: d003b410450df4c489e89af727f0df3e, type: 3}
       propertyPath: defaultWeapon

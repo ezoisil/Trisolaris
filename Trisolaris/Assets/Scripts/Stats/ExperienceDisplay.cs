@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Trisolaris.Attributes
+namespace Trisolaris.Stats
 {
     public class ExperienceDisplay : MonoBehaviour
     {

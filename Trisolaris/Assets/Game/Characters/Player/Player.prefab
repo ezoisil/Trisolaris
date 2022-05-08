@@ -2128,6 +2128,10 @@ PrefabInstance:
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3518153025908447266, guid: 5f4c0e57ecff62e428c766e92a4d4b38, type: 3}
+      propertyPath: progression
+      value: 
+      objectReference: {fileID: 11400000, guid: 91680f52377f260438f88f4d51d8ec06, type: 2}
+    - target: {fileID: 3518153025908447266, guid: 5f4c0e57ecff62e428c766e92a4d4b38, type: 3}
       propertyPath: characterClass
       value: 0
       objectReference: {fileID: 0}
@@ -2203,6 +2207,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4083396094418073738, guid: 5f4c0e57ecff62e428c766e92a4d4b38, type: 3}
   m_PrefabInstance: {fileID: 7197839290552161430}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2076140786659942353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577788379012246556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e805525f32b88a4f86aaa61cfec7966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experiencePoints: 0
 --- !u!114 &3211061729365074048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2244,16 +2261,3 @@ MonoBehaviour:
   rightHandTransform: {fileID: 2550784023310761833}
   leftHandTransform: {fileID: 4285377298584909315}
   defaultWeapon: {fileID: 11400000, guid: 876d89b759922f242bafafba54e3a476, type: 2}
---- !u!114 &2076140786659942353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6577788379012246556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e805525f32b88a4f86aaa61cfec7966, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  experiencePoints: 0
