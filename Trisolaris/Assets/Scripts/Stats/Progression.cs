@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Trisolaris.Stats
 {
@@ -7,28 +9,43 @@ namespace Trisolaris.Stats
     {
         [SerializeField] ProgressionCharacterClass[] progressionCharacterClass = null;
 
+        Dictionary<CharacterClass, Dictionary<Stat, float[]>> lookupTable = null;
         public float GetStat(CharacterClass characterClass,Stat stat ,int level)
         {
-            foreach(ProgressionCharacterClass character in progressionCharacterClass)
-            {
-                if (character.characterClass != characterClass) continue;
-                
-                    foreach(ProgressionStat progressionStat in character.stats)
-                    {
-                    
-                    if (stat != progressionStat.stat) continue;                        
-                    
-                    if(progressionStat.levels.Length < level ) continue;
 
-                    return progressionStat.levels[level - 1];
-                        
-                    }
-                
+            BuildLookup();
+            float[] levels = lookupTable[characterClass][stat];
+            if (levels.Length < level)
+            {
+                Debug.Log("Stat level out of reach in progresion");
+                return 0;
             }
-            Debug.LogError("no character match");
-            return 0;
+            return levels[level-1];
+           
         }
 
+        private void BuildLookup()
+        {
+            if (lookupTable != null) return;
+
+            lookupTable = new Dictionary<CharacterClass, Dictionary<Stat, float[]>>();
+
+            foreach(ProgressionCharacterClass progressionClass in progressionCharacterClass)
+            {
+
+                var statLookupTable = new Dictionary<Stat, float[]>();
+
+                foreach(ProgressionStat progressionStat in progressionClass.stats)
+                {
+                    statLookupTable[progressionStat.stat] = progressionStat.levels;
+                }
+
+                lookupTable[progressionClass.characterClass] = statLookupTable;
+            }
+
+
+
+        }
 
         [System.Serializable]
         class ProgressionCharacterClass
