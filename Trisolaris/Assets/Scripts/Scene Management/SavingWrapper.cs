@@ -29,6 +29,10 @@ namespace Trisolaris.SceneManagement
             {
                 Save();
             }
+            if (Input.GetKeyDown(KeyCode.Delete))
+            {
+                Delete();
+            }
         }
 
         public void Save()
@@ -41,6 +45,11 @@ namespace Trisolaris.SceneManagement
         {
             // call to the saving system
             GetComponent<SavingSystem>().Load(defaultSaveFile);
+        }
+
+        public void Delete()
+        {
+            GetComponent<SavingSystem>().Delete(defaultSaveFile);
         }
     }
 }
