@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 3436589461968368621}
   - component: {fileID: 5027548679533514566}
   m_Layer: 0
-  m_Name: 'Levet Text  '
+  m_Name: 'Level Text  '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
