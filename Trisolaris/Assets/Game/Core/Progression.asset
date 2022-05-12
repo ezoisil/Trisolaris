@@ -21,93 +21,49 @@ MonoBehaviour:
       - 200
       stat: 0
     - levels:
+      - 30
+      - 90
+      - 120
+      - 150
+      - 200
+      stat: 2
+    - levels:
       - 10
       - 30
       - 70
       - 120
       - 200
-      stat: 2
+      stat: 3
   - characterClass: 1
     stats:
     - levels:
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
+      - 70
       stat: 0
+    - levels:
+      - 30
+      stat: 1
+    - levels:
+      - 5
+      stat: 3
   - characterClass: 2
     stats:
     - levels:
       - 70
       stat: 0
+    - levels:
+      - 30
+      stat: 1
+    - levels:
+      - 5
+      stat: 3
   - characterClass: 3
     stats:
     - levels:
       - 70
       stat: 0
+    - levels:
+      - 30
+      stat: 1
+    - levels:
+      - 5
+      stat: 3

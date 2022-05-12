@@ -10,6 +10,7 @@ namespace Trisolaris.Stats
         [SerializeField] CharacterClass characterClass;
         [SerializeField] Progression progression = null;
         [SerializeField] GameObject levelUpParticleEffect = null;
+        [SerializeField] bool shouldUseModifier = false;
 
         public event Action onLevelUp;
 
@@ -43,10 +44,16 @@ namespace Trisolaris.Stats
 
         public float GetStat(Stat stat)
         {
-            return progression.GetStat(characterClass,stat , GetLevel()) + GetAdditiveModifiers(stat);
+            return (GetBaseStat(stat) + GetAdditiveModifiers(stat)) * (1 + GetPercentageModifier(stat)/100);
         }
 
         
+
+        private float GetBaseStat(Stat stat)
+        {
+            return progression.GetStat(characterClass, stat, GetLevel());
+        }
+
         public int GetLevel()
         {
             if(currentLevel < 1)
@@ -75,12 +82,26 @@ namespace Trisolaris.Stats
         }
         private float GetAdditiveModifiers(Stat stat)
         {
+            if(!shouldUseModifier) return 0;
             float total = 0;
             foreach(IModifierProvider provider in GetComponents<IModifierProvider>())
             {
-                foreach (float modifier in provider.GetAdditiveModifier(stat))
+                foreach (float modifier in provider.GetAdditiveModifiers(stat))
                 {
                     total += modifier;
+                }
+            }
+            return total;
+        }
+
+        private float GetPercentageModifier(Stat stat)
+        {
+            float total = 0;
+            foreach(IModifierProvider provider in GetComponents<IModifierProvider>())
+            {
+                foreach(float modifier in provider.GetPercentageModifiers(stat))
+                {
+                    total *= modifier;
                 }
             }
             return total;
