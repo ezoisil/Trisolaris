@@ -7,15 +7,20 @@ namespace Trisolaris.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
+        [SerializeField] float regenerationPercentage = 70;
+        
         float healthPoints = -1f;
         bool isDead = false;
 
         private void Start()
         {
+            GetComponent<BaseStats>().onLevelUp += RegenerateHealth;
+
             if (healthPoints < 0)
             {
                 healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
             }
+
         }
 
         public void TakeDamage(GameObject instigator, float damage)
@@ -30,7 +35,11 @@ namespace Trisolaris.Attributes
 
         }
 
-       
+        private void RegenerateHealth()
+        {
+            float regenHealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health) * regenerationPercentage / 100;
+            healthPoints = Mathf.Max(regenHealthPoints, healthPoints);
+        }
        
         private void Die()
         {

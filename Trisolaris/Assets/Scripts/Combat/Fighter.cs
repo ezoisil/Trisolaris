@@ -109,7 +109,6 @@ namespace Trisolaris.Combat
         {
             GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget.GetComponent<Health>();
-            Debug.Log("attack!");          
         }
 
         public void Cancel()
