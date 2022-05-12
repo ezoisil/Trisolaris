@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Trisolaris.Core;
 using UnityEngine;
 using UnityEngine.AI;
@@ -68,7 +65,6 @@ namespace Trisolaris.Movement
 
         public void RestoreState(object state)
         {
- 
             GetComponent<NavMeshAgent>().enabled = false;
             MoverSaveData data = (MoverSaveData)state;
             transform.position = data.position.ToVector();

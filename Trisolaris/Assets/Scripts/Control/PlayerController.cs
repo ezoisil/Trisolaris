@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Trisolaris.Movement;
 using Trisolaris.Combat;
@@ -13,7 +11,7 @@ namespace Trisolaris.Control
         int MOVE_BUTTON = 0;
         Health health;
 
-        private void Start()
+        private void Awake()
         {
             health = GetComponent<Health>();
         }

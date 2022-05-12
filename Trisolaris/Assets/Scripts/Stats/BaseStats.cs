@@ -15,14 +15,31 @@ namespace Trisolaris.Stats
         public event Action onLevelUp;
 
         int currentLevel = 0;
+        Experience experience;
+
+        private void Awake()
+        {
+            experience = GetComponent<Experience>();
+        }
 
         private void Start()
         {
-            currentLevel = GetLevel();
-            Experience experience = GetComponent<Experience>();
-            if(experience != null)
+            currentLevel = GetLevel();        
+        }
+
+        private void OnEnable()
+        {
+            if (experience != null)
             {
                 experience.onExperienceGained += UpdateLevel;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (experience != null)
+            {
+                experience.onExperienceGained -= UpdateLevel;
             }
         }
 
@@ -64,7 +81,6 @@ namespace Trisolaris.Stats
         }
         private int CalculateLevel()
         {
-            Experience experience = GetComponent<Experience>();
             if (experience == null) return startingLevel;
 
             float currentXP = experience.GetExperiencePoints();

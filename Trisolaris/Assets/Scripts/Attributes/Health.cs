@@ -11,16 +11,28 @@ namespace Trisolaris.Attributes
         
         float healthPoints = -1f;
         bool isDead = false;
+        BaseStats baseStats;
+
+        private void Awake()
+        {
+            baseStats = GetComponent<BaseStats>();
+        }
 
         private void Start()
         {
-            GetComponent<BaseStats>().onLevelUp += RegenerateHealth;
-
             if (healthPoints < 0)
             {
-                healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
+                healthPoints = baseStats.GetStat(Stat.Health);
             }
+        }
 
+        private void OnEnable()
+        {
+            baseStats.onLevelUp += RegenerateHealth;
+        }
+        private void OnDisable()
+        {
+            baseStats.onLevelUp -= RegenerateHealth;
         }
 
         public void TakeDamage(GameObject instigator, float damage)
@@ -37,7 +49,7 @@ namespace Trisolaris.Attributes
 
         private void RegenerateHealth()
         {
-            float regenHealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health) * regenerationPercentage / 100;
+            float regenHealthPoints = baseStats.GetStat(Stat.Health) * regenerationPercentage / 100;
             healthPoints = Mathf.Max(regenHealthPoints, healthPoints);
         }
        
@@ -51,9 +63,9 @@ namespace Trisolaris.Attributes
         private void AwardExperience(GameObject instigator)
         {
             Experience experience = instigator.GetComponent<Experience>();
-            if (experience == null) return;  
-            
-            experience.GainExperience(GetComponent<BaseStats>().GetStat(Stat.ExperienceReward));
+            if (experience == null) return;
+
+            experience.GainExperience(baseStats.GetStat(Stat.ExperienceReward));
             
 
         }
@@ -81,7 +93,7 @@ namespace Trisolaris.Attributes
 
         public float GetPercentage()
         {
-            return (healthPoints / GetComponent<BaseStats>().GetStat(Stat.Health)) * 100;
+            return (healthPoints / baseStats.GetStat(Stat.Health)) * 100;
         }
     }
 }
