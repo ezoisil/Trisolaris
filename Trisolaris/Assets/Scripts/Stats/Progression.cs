@@ -55,6 +55,8 @@ namespace Trisolaris.Stats
             return levels.Length;
         }
 
+  
+
         [System.Serializable]
         class ProgressionCharacterClass
         {

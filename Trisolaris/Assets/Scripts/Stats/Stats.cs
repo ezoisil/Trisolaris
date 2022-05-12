@@ -6,6 +6,7 @@ namespace Trisolaris.Stats
         {
             Health,
             ExperienceReward,
-            ExperienceToLevelUp
+            ExperienceToLevelUp, 
+            Damage
         }
 }

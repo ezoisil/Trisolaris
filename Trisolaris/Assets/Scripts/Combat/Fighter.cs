@@ -5,6 +5,7 @@ using Trisolaris.Attributes;
 using Trisolaris.Core;
 using Trisolaris.Movement;
 using Trisolaris.Saving;
+using Trisolaris.Stats;
 using UnityEngine;
 
 namespace Trisolaris.Combat
@@ -83,14 +84,15 @@ namespace Trisolaris.Combat
         void Hit()
         {
             if (target == null) return;
+            float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
 
             if (currentWeapon.HasProjectile())
             {
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject);
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
             }
             else
             {
-                target.TakeDamage(gameObject,currentWeapon.GetDamage());
+                target.TakeDamage(gameObject, damage);
 
             }
         }
