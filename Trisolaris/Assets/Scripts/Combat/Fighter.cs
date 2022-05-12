@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Trisolaris.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable
+    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
     {
         [SerializeField] float timeBetweenAttacks;
         [SerializeField] Transform rightHandTransform = null;
@@ -126,6 +126,14 @@ namespace Trisolaris.Combat
             animator.SetTrigger("stopAttacking");
         }
 
+        public IEnumerable<float> GetAdditiveModifier(Stat stat)
+        {
+            if(stat == Stat.Damage)
+            {
+                yield return currentWeapon.GetDamage();
+            }
+        }
+
         public bool CanAttack(GameObject combatTarget)
         {
             if (combatTarget == null) return false;
@@ -148,5 +156,7 @@ namespace Trisolaris.Combat
         {
             return target;
         }
+
+        
     }
 }

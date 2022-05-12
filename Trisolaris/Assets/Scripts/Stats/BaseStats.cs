@@ -43,9 +43,10 @@ namespace Trisolaris.Stats
 
         public float GetStat(Stat stat)
         {
-            return progression.GetStat(characterClass,stat , GetLevel());
+            return progression.GetStat(characterClass,stat , GetLevel()) + GetAdditiveModifiers(stat);
         }
 
+        
         public int GetLevel()
         {
             if(currentLevel < 1)
@@ -54,7 +55,7 @@ namespace Trisolaris.Stats
             }
             return currentLevel;
         }
-        public int CalculateLevel()
+        private int CalculateLevel()
         {
             Experience experience = GetComponent<Experience>();
             if (experience == null) return startingLevel;
@@ -72,8 +73,21 @@ namespace Trisolaris.Stats
 
             return PenultimateLevel + 1;
         }
+        private float GetAdditiveModifiers(Stat stat)
+        {
+            float total = 0;
+            foreach(IModifierProvider provider in GetComponents<IModifierProvider>())
+            {
+                foreach (float modifier in provider.GetAdditiveModifier(stat))
+                {
+                    total += modifier;
+                }
+            }
+            return total;
+        }
+
 
     }
 
-    
+
 }
