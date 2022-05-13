@@ -1,18 +1,29 @@
 using System.Collections;
+using Trisolaris.Control;
 using UnityEngine;
 
 namespace Trisolaris.Combat
 {
-    public class WeaponPickup : MonoBehaviour
+    public class WeaponPickup : MonoBehaviour, IRaycastable
     {
         [SerializeField] Weapon weapon = null;
         [SerializeField] float respawnTime = 5;
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag != "Player") { return; }
-            
-            other.gameObject.GetComponent<Fighter>().EquipWeapon(weapon);
+            if (other.gameObject.tag == "Player") 
+            {
+
+            Pickup(other.gameObject.GetComponent<Fighter>());
+
+            }
+
+
+        }
+
+        private void Pickup(Fighter fighter)
+        {
+            fighter.EquipWeapon(weapon);
             StartCoroutine(HideForSeconds(respawnTime));
         }
 
@@ -34,6 +45,13 @@ namespace Trisolaris.Combat
         
         }
 
-       
+        public bool HandleRaycast(PlayerController callingController)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Pickup(callingController.GetComponent<Fighter>());
+            }
+            return true;
+        }
     }
 }

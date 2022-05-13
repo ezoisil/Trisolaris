@@ -2,6 +2,8 @@ using UnityEngine;
 using Trisolaris.Movement;
 using Trisolaris.Combat;
 using Trisolaris.Attributes;
+using System;
+using UnityEngine.EventSystems;
 
 namespace Trisolaris.Control
 {
@@ -11,6 +13,24 @@ namespace Trisolaris.Control
         int MOVE_BUTTON = 0;
         Health health;
 
+        enum CursorType
+        {
+            None,
+            Movement,
+            Combat,
+            UI
+        }
+
+        [System.Serializable]
+        struct CursorMapping
+        {
+            public CursorType type;
+            public Texture2D texture;
+            public Vector2 hotspot;
+        }
+
+        [SerializeField] CursorMapping[] cursorMappings = null;
+
         private void Awake()
         {
             health = GetComponent<Health>();
@@ -18,36 +38,50 @@ namespace Trisolaris.Control
 
         private void Update()
         {
-            if (health.IsDead()) return;
+            if (InteractWithUI())return;
+            if (health.IsDead())
+            {
+                SetCursor(CursorType.None);
+                return;
+            }
+            if (InteractWithComponent()) return;
+            if (InteractWithMovement()) return;
 
-            if(InteractWithCombat())return;
-            if (InteractWithMovement()) return; 
+            SetCursor(CursorType.None);
+
         }
 
-        private bool InteractWithCombat()
+        private bool InteractWithComponent()
         {
             RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
             foreach (RaycastHit hit in hits)
             {
-                CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (target == null) continue;
-
-                if (!GetComponent<Fighter>().CanAttack(target.gameObject)) 
+                IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
+                foreach(IRaycastable raycastable in raycastables)
                 {
-                    continue;
+                    if (raycastable.HandleRaycast(this))
+                    {
+                        SetCursor(CursorType.Combat);
+                        return true;
+                    }
                 }
-
-                if (Input.GetMouseButton(ATTACK_BUTTON))
-                {
-                    GetComponent<Fighter>().Attack(target.gameObject);
-                }else if (Input.GetMouseButton(MOVE_BUTTON))
-                {
-                    GetComponent<Mover>().StartMoveAction(hit.point, 1f);
-                }
-                return true;
             }
             return false;
         }
+        
+        // Is pointer over a UI game object
+        private bool InteractWithUI()
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                SetCursor(CursorType.UI);
+                return true;
+
+            }
+            return false;
+        }
+
+       
 
         private bool InteractWithMovement()
         {
@@ -60,11 +94,29 @@ namespace Trisolaris.Control
                 {
                     GetComponent<Mover>().StartMoveAction(hit.point,1f);
                 }
+                SetCursor(CursorType.Movement);
                 return true;
             }
             return false;
         }
 
+        private void SetCursor(CursorType type)
+        {
+            CursorMapping mapping = GetCursorMapping(type);
+            Cursor.SetCursor(mapping.texture, mapping.hotspot, CursorMode.Auto);
+        }
+
+        private CursorMapping GetCursorMapping(CursorType type)
+        {
+            foreach (CursorMapping mapping in cursorMappings)
+            {
+                if(mapping.type == type)
+                {
+                    return mapping;
+                }
+            }
+            return cursorMappings[0];
+        }
         private static Ray GetMouseRay()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
