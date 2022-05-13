@@ -24,6 +24,7 @@ namespace Trisolaris.Control
 
         [SerializeField] CursorMapping[] cursorMappings = null;
         [SerializeField] float maxNavMeshProjectionDistance = 1f;
+        [SerializeField] float maxNavPathLength = 40;
 
         private void Awake()
         {
@@ -95,6 +96,8 @@ namespace Trisolaris.Control
             return false;
         }
 
+        
+        // Excludes the hits if they don't have a walkable navmesh neat them.
         private bool RaycastNavMesh(out Vector3 target)
         {
             target = new Vector3();
@@ -103,6 +106,7 @@ namespace Trisolaris.Control
             bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
             if (!hasHit) return false;
 
+            // Cheks for a navmash near hit
             NavMeshHit navMeshHit;
             bool hasCastToNavMesh = NavMesh.SamplePosition(
                 hit.point, out navMeshHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
@@ -110,8 +114,35 @@ namespace Trisolaris.Control
             if (!hasCastToNavMesh) return false;
 
             target = navMeshHit.position;
+
+            // If target position is too far away, or the path calculated is a partial path, the path 
+            //will be discarded.
+
+            NavMeshPath path = new NavMeshPath();
+            bool hasPath = NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, path);
+            if(!hasPath) return false;
+            if(path.status != NavMeshPathStatus.PathComplete) return false;
+            if (GetPathLength(path) > maxNavPathLength) return false;
+
+
             return true;
         }
+
+        private float GetPathLength(NavMeshPath path)
+        {
+            Vector3[] corners = path.corners;
+            float pathLength = 0;
+
+            if (path.corners.Length < 2) return pathLength;
+
+            for(int i=0; i<corners.Length-1; i++)
+            {
+                pathLength += Vector3.Distance(corners[i], corners[i+1]);
+            }
+
+            return pathLength;
+        }
+
         private void SetCursor(CursorType type)
         {
             CursorMapping mapping = GetCursorMapping(type);

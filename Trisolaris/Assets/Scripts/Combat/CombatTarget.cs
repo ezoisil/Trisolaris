@@ -19,9 +19,9 @@ namespace Trisolaris.Combat
                 return false;
             }
 
-            if (Input.GetMouseButton(1))
+            if (Input.GetMouseButtonDown(1))
             {
-                GetComponent<Fighter>().Attack(callingController.gameObject);
+                callingController.GetComponent<Fighter>().Attack(gameObject);
             }
           
             return true;
