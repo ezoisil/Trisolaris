@@ -2,12 +2,14 @@ using UnityEngine;
 using Trisolaris.Saving;
 using Trisolaris.Stats;
 using Trisolaris.Core;
+using UnityEngine.Events;
 
 namespace Trisolaris.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float regenerationPercentage = 70;
+        [SerializeField] UnityEvent takeDamage;
         
         float healthPoints = -1f;
         bool isDead = false;
@@ -38,11 +40,17 @@ namespace Trisolaris.Attributes
         public void TakeDamage(GameObject instigator, float damage)
         {
             if (isDead) return;
+
             healthPoints = Mathf.Max(healthPoints - damage, 0);
+
             if(healthPoints == 0)
             {
                 Die();
                 AwardExperience(instigator);
+            }
+            else
+            {
+                takeDamage.Invoke();
             }
 
         }
