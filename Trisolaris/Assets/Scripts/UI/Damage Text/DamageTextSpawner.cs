@@ -9,9 +9,12 @@ namespace Trisolaris.UI.DamageText
         [SerializeField] DamageText damageTextPrefab = null;
        
 
-        public void Spawn(float Damage)
+        public void Spawn(float damage)
         {
             DamageText instance = Instantiate<DamageText>(damageTextPrefab,transform);
+            instance.GetComponent<DamageText>().SetValue(damage);
         }
+
+       
     }
 }
