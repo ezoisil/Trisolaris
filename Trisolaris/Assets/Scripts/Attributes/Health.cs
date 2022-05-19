@@ -109,7 +109,12 @@ namespace Trisolaris.Attributes
 
         public float GetPercentage()
         {
-            return (healthPoints / baseStats.GetStat(Stat.Health)) * 100;
+            return  GetFraction() * 100;
+        }
+
+        public float GetFraction()
+        {
+             return (healthPoints / baseStats.GetStat(Stat.Health));
         }
     }
 }

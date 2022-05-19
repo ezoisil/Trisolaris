@@ -122,6 +122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5077659378843049532}
+  - component: {fileID: 2900560327160177537}
   m_Layer: 0
   m_Name: Health Bar
   m_TagString: Untagged
@@ -138,12 +139,25 @@ Transform:
   m_GameObject: {fileID: 6637353969513442035}
   m_LocalRotation: {x: -0, y: 0.8012055, z: -0, w: 0.5983893}
   m_LocalPosition: {x: -0.0998171, y: 0.6514748, z: 2.497357}
-  m_LocalScale: {x: 0.9999999, y: 1, z: 0.9999999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4614422162451369146}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2900560327160177537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6637353969513442035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffa5f6f320d56ed42a131b8ec67270a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foreground: {fileID: 982118580242291776}
 --- !u!1 &6774444059844005345
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,8 +192,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0017814636, y: 0}
-  m_SizeDelta: {x: -10.2, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &7899354525962158982
 CanvasRenderer:
