@@ -9,7 +9,15 @@ namespace Trisolaris.Attributes
     public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float regenerationPercentage = 70;
-        [SerializeField] UnityEvent takeDamage;
+        [SerializeField] UnityEvent<float> takeDamage;
+
+        // We are doing this to make SerializeField work.
+        [System.Serializable]
+        public class TakeDamageEvet : UnityEvent<float>
+        {
+
+        }
+
         
         float healthPoints = -1f;
         bool isDead = false;
@@ -50,7 +58,7 @@ namespace Trisolaris.Attributes
             }
             else
             {
-                takeDamage.Invoke();
+                takeDamage.Invoke(damage);
             }
 
         }
