@@ -12,7 +12,8 @@ namespace Trisolaris.Attributes
        
         void Update()
         {
-            if (Mathf.Approximately(healthComponent.GetFraction(), 0) || Mathf.Approximately(healthComponent.GetFraction(), 1))
+            if (Mathf.Approximately(healthComponent.GetFraction(), 0) 
+                || Mathf.Approximately(healthComponent.GetFraction(), 1))
             {
                 rootCanvas.enabled = false;
                 return;
