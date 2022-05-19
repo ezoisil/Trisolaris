@@ -8,16 +8,19 @@ namespace Trisolaris.Attributes
     {
         [SerializeField] RectTransform foreground = null;
         [SerializeField] Health healthComponent = null;
+        [SerializeField] Canvas rootCanvas = null;
        
         void Update()
         {
-            SetScale();
-        }
+            if (Mathf.Approximately(healthComponent.GetFraction(), 0) || Mathf.Approximately(healthComponent.GetFraction(), 1))
+            {
+                rootCanvas.enabled = false;
+                return;
+            }
 
-        private void SetScale()
-        {
-            float scale = healthComponent.GetFraction();
-            foreground.localScale = new Vector3(scale, 1, 1);
+            rootCanvas.enabled = true;
+            foreground.localScale = new Vector3(healthComponent.GetFraction(), 1, 1);
+
         }
     }
 }
