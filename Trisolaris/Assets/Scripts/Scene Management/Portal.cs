@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Trisolaris.Control;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -42,13 +43,21 @@ namespace Trisolaris.SceneManagement
             DontDestroyOnLoad(gameObject);
 
             Fader fader = FindObjectOfType<Fader>();
+            SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
+
+            //Remove control to avoid coroutine race conditions.
+            PlayerController playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            playerController.enabled = false;
 
             yield return fader.FadeOut(timeFadeOut);
 
-            SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
+            
             wrapper.Save();
 
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
+
+            PlayerController newPlayerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            newPlayerController.enabled = false;
 
             wrapper.Load();
             
@@ -58,8 +67,9 @@ namespace Trisolaris.SceneManagement
             wrapper.Save();
 
             yield return new WaitForSeconds(waitForFadeIn);
-            yield return fader.FadeIn(timeFadeIn);
+            fader.FadeIn(timeFadeIn);
 
+            newPlayerController.enabled = true;
             Destroy(gameObject);
         }
 
