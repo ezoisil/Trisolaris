@@ -6,7 +6,8 @@ namespace Trisolaris.Core
 {
     public class CameraFacing : MonoBehaviour
     {
-        private void Update()
+        // LateUpdate is used to resolve the race condition. Otherwise, parent update overrides this update and feature doesn't work as it should.
+        private void LateUpdate()
         {
             transform.forward = Camera.main.transform.forward;
         }
