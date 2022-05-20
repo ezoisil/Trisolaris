@@ -15,14 +15,14 @@ namespace Trisolaris.Combat
         [SerializeField] float timeBetweenAttacks;
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
-        [SerializeField] Weapon defaultWeapon = null;
+        [SerializeField] WeaponConfig defaultWeapon = null;
 
         
         Health target;
         Mover mover;
         float timeSinceLastAttack;
         Animator animator;
-        Weapon currentWeapon = null;
+        WeaponConfig currentWeapon = null;
 
         private void Awake()
         {
@@ -56,7 +56,7 @@ namespace Trisolaris.Combat
                 AttackBehaviour();
             }
         }
-        public void EquipWeapon(Weapon weapon)
+        public void EquipWeapon(WeaponConfig weapon)
         {
             currentWeapon = weapon;
             currentWeapon.Spawn(rightHandTransform,leftHandTransform, animator);
@@ -156,7 +156,7 @@ namespace Trisolaris.Combat
 
         public void RestoreState(object state)
         {
-            Weapon weapon = Resources.Load<Weapon>((string)state);
+            WeaponConfig weapon = Resources.Load<WeaponConfig>((string)state);
             currentWeapon = weapon;
         }
 
