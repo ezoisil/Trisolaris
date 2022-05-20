@@ -15,30 +15,41 @@ namespace Trisolaris.Combat
         [SerializeField] float timeBetweenAttacks;
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
-        [SerializeField] WeaponConfig defaultWeapon = null;
+        [SerializeField] WeaponConfig defaultWeaponConfig = null;
 
         
         Health target;
         Mover mover;
         float timeSinceLastAttack;
         Animator animator;
-        WeaponConfig currentWeapon = null;
+        WeaponConfig currentWeaponConfig = null;
+        Weapon currentWeapon;
 
         private void Awake()
         {
             mover = GetComponent<Mover>();
             animator = GetComponent<Animator>();
+            currentWeaponConfig = defaultWeaponConfig;
+            currentWeapon = SetupDefaultWeapon();
+
+        }
+
+        private Weapon SetupDefaultWeapon()
+        {
+            return AttachWeapon(defaultWeaponConfig);
         }
 
         private void Start()
-        {          
-            if(currentWeapon == null)
-            {
-                EquipWeapon(defaultWeapon);
-            }
+        {
+            EquipWeapon(currentWeaponConfig);
         }
 
-      
+        public void EquipWeapon(WeaponConfig weapon)
+        {
+            currentWeaponConfig = weapon;
+            currentWeapon = AttachWeapon(weapon);
+        }
+
         private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
@@ -56,10 +67,10 @@ namespace Trisolaris.Combat
                 AttackBehaviour();
             }
         }
-        public void EquipWeapon(WeaponConfig weapon)
+        public Weapon AttachWeapon(WeaponConfig weapon)
         {
-            currentWeapon = weapon;
-            currentWeapon.Spawn(rightHandTransform,leftHandTransform, animator);
+            Animator animator = GetComponent<Animator>();
+            return weapon.Spawn(rightHandTransform, leftHandTransform, animator);
         }
 
         private void AttackBehaviour()
@@ -86,9 +97,14 @@ namespace Trisolaris.Combat
             if (target == null) return;
             float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
 
-            if (currentWeapon.HasProjectile())
+            if(currentWeapon != null)
             {
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
+                currentWeapon.OnHit();
+            }
+
+            if (currentWeaponConfig.HasProjectile())
+            {
+                currentWeaponConfig.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
             }
             else
             {
@@ -104,7 +120,7 @@ namespace Trisolaris.Combat
 
         private bool GetIsInRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) < currentWeapon.GetRange();
+            return Vector3.Distance(transform.position, target.transform.position) < currentWeaponConfig.GetRange();
         }
 
         public void Attack(GameObject combatTarget)
@@ -130,7 +146,7 @@ namespace Trisolaris.Combat
         {
             if(stat == Stat.Damage)
             {
-                yield return currentWeapon.GetDamage();
+                yield return currentWeaponConfig.GetDamage();
             }
         }
 
@@ -138,7 +154,7 @@ namespace Trisolaris.Combat
         {
             if(stat == Stat.Damage)
             {
-                yield return currentWeapon.GetPercentageBonus();
+                yield return currentWeaponConfig.GetPercentageBonus();
             }
         }
 
@@ -151,13 +167,13 @@ namespace Trisolaris.Combat
 
         public object CaptureState()
         {
-            return currentWeapon.name;
+            return currentWeaponConfig.name;
         }
 
         public void RestoreState(object state)
         {
             WeaponConfig weapon = Resources.Load<WeaponConfig>((string)state);
-            currentWeapon = weapon;
+            currentWeaponConfig = weapon;
         }
 
         public Health GetTarget()

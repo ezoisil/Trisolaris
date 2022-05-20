@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Simple Bow
   m_EditorClassIdentifier: 
   animatorOverride: {fileID: 22100000, guid: 9f047cf6d59ab584980ef20b093259fe, type: 2}
-  equippedPrefab: {fileID: 5239970649466846170, guid: a9670ca933685f24d8ef577558b02f54, type: 3}
+  equippedPrefab: {fileID: 6199550371619553090, guid: a9670ca933685f24d8ef577558b02f54, type: 3}
   weaponDamage: 10
+  percentageBonus: 0
   weaponRange: 7
   isRightHanded: 0
   projectile: {fileID: 8769793319113948819, guid: 6253347068088da4d988410f9368515d, type: 3}

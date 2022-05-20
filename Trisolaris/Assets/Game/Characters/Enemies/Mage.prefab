@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mage
       objectReference: {fileID: 0}
+    - target: {fileID: 3243855179367295728, guid: d003b410450df4c489e89af727f0df3e, type: 3}
+      propertyPath: defaultWeaponConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 25513dd83622b5e4588cceb21c55b2de, type: 2}
     - target: {fileID: 7001431745479966460, guid: d003b410450df4c489e89af727f0df3e, type: 3}
       propertyPath: m_RootOrder
       value: 0

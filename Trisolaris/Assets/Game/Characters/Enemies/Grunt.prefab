@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grunt
       objectReference: {fileID: 0}
+    - target: {fileID: 3243855179367295728, guid: d003b410450df4c489e89af727f0df3e, type: 3}
+      propertyPath: defaultWeaponConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 2564472fe1b7654449118273bda72cf0, type: 2}
     - target: {fileID: 7001431745479966460, guid: d003b410450df4c489e89af727f0df3e, type: 3}
       propertyPath: m_RootOrder
       value: 0
