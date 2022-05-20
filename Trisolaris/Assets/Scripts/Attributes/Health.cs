@@ -10,13 +10,15 @@ namespace Trisolaris.Attributes
     {
         [SerializeField] float regenerationPercentage = 70;
         [SerializeField] UnityEvent<float> takeDamage;
+        [SerializeField] UnityEvent onDie;
 
         // We are doing this to make SerializeField work.
-        [System.Serializable]
-        public class TakeDamageEvet : UnityEvent<float>
-        {
+        //[System.Serializable]
+        //public class TakeDamageEvent : UnityEvent<float>
+        //{
 
-        }
+        //}
+        
 
         
         float healthPoints = -1f;
@@ -53,6 +55,7 @@ namespace Trisolaris.Attributes
 
             if(healthPoints == 0)
             {
+                onDie.Invoke();
                 Die();
                 AwardExperience(instigator);
             }

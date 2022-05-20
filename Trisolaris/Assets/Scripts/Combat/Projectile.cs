@@ -1,6 +1,7 @@
 using System.Collections;
 using Trisolaris.Attributes;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Trisolaris.Combat
 {
@@ -13,6 +14,7 @@ namespace Trisolaris.Combat
         [SerializeField] GameObject hitEffect = null;
         [SerializeField] GameObject[] destroyOnHit = null;
         [SerializeField] float lifeAfterImpact = .2f;
+        [SerializeField] UnityEvent onHit;
 
         private Health target = null;
         float damage = 0;
@@ -61,6 +63,8 @@ namespace Trisolaris.Combat
             target.TakeDamage(instigator,damage);
 
             speed = 0;
+
+            onHit.Invoke();
 
             if(hitEffect != null)
             {
