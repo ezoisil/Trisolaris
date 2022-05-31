@@ -1,3 +1,4 @@
+using System;
 using Trisolaris.Attributes;
 using Trisolaris.Combat;
 using Trisolaris.Core;
@@ -15,6 +16,7 @@ namespace Trisolaris.Control
         [SerializeField] float wayPointTolerance = 1f;
         [Range(0,1)]
         [SerializeField] float patrolSpeedFraction = 0.2f;
+        [SerializeField] float shoutDistance = 5f;
 
 
         Fighter fighter;
@@ -123,6 +125,22 @@ namespace Trisolaris.Control
         {
             timeSinceLastSawPlayer = 0;
             fighter.Attack(player);
+
+            AggrevateNearbyEnemies();
+        }
+
+        private void AggrevateNearbyEnemies()
+        {
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, shoutDistance, Vector3.up, 0);
+            
+            foreach(RaycastHit hit in hits)
+            {
+                AIController ai = (hit.transform.gameObject.GetComponent<AIController>());
+                if (ai!= null)
+                {
+                    ai.Aggrevate();
+                }
+            }
         }
 
         private bool IsAggrevated()

@@ -24,6 +24,7 @@ namespace Trisolaris.Control
 
         [SerializeField] CursorMapping[] cursorMappings = null;
         [SerializeField] float maxNavMeshProjectionDistance = 1f;
+        [SerializeField] float errorMargin = 1f;
 
         private void Awake()
         {
@@ -47,7 +48,7 @@ namespace Trisolaris.Control
 
         private bool InteractWithComponent()
         {
-            RaycastHit[] hits = RaycastAllSorted();
+            RaycastHit[] hits = SphereCastAllSorted();
             foreach (RaycastHit hit in hits)
             {
                 IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
@@ -145,9 +146,9 @@ namespace Trisolaris.Control
         
         // Sort the rays so that when two components are alligned, it will choose the closest 
         // one to the player.
-        RaycastHit[] RaycastAllSorted()
+        RaycastHit[] SphereCastAllSorted()
         {
-            RaycastHit[]hits= Physics.RaycastAll(GetMouseRay());
+            RaycastHit[]hits= Physics.SphereCastAll(GetMouseRay(),errorMargin);
 
             float[]distances = new float[hits.Length];
             for (int i = 0; i<hits.Length; i++)
