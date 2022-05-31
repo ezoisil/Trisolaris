@@ -3,6 +3,7 @@ using Trisolaris.Saving;
 using Trisolaris.Stats;
 using Trisolaris.Core;
 using UnityEngine.Events;
+using System;
 
 namespace Trisolaris.Attributes
 {
@@ -38,6 +39,8 @@ namespace Trisolaris.Attributes
             }
         }
 
+        
+
         private void OnEnable()
         {
             baseStats.onLevelUp += RegenerateHealth;
@@ -64,6 +67,17 @@ namespace Trisolaris.Attributes
                 takeDamage.Invoke(damage);
             }
 
+        }
+
+        public void Heal(float healthToRestore)
+        {
+            baseStats.GetStat(Stat.Health);
+            healthPoints = Mathf.Min(healthPoints + healthToRestore, GetMaxHealthPoints()) ;
+        }
+
+        private float GetMaxHealthPoints()
+        {
+            return baseStats.GetStat(Stat.Health);
         }
 
         private void RegenerateHealth()
