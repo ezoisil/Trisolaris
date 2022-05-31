@@ -57,7 +57,7 @@ namespace Trisolaris.Combat
 
             if (target == null) return;
             if (target.IsDead()) return;
-            if (!GetIsInRange())
+            if (!GetIsInRange(target.transform))
             {
                 mover.MoveTo(target.transform.position, 1f);
             }
@@ -118,9 +118,9 @@ namespace Trisolaris.Combat
             Hit();
         }
 
-        private bool GetIsInRange()
+        private bool GetIsInRange(Transform targetTransform)
         {
-            return Vector3.Distance(transform.position, target.transform.position) < currentWeaponConfig.GetRange();
+            return Vector3.Distance(transform.position, targetTransform.position) < currentWeaponConfig.GetRange();
         }
 
         public void Attack(GameObject combatTarget)
@@ -161,7 +161,11 @@ namespace Trisolaris.Combat
         public bool CanAttack(GameObject combatTarget)
         {
             if (combatTarget == null) return false;
-            if(!mover.CanMoveTo(combatTarget.transform.position)) return false;
+            if (!mover.CanMoveTo(combatTarget.transform.position) && 
+                !GetIsInRange(combatTarget.transform))
+            {
+                return false;
+            }
             Health healthToTest = combatTarget.GetComponent<Health>();
             return healthToTest != null && !healthToTest.IsDead() ;
         }
