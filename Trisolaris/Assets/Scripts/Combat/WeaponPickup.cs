@@ -1,4 +1,5 @@
 using System.Collections;
+using Trisolaris.Attributes;
 using Trisolaris.Control;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Trisolaris.Combat
     public class WeaponPickup : MonoBehaviour, IRaycastable
     {
         [SerializeField] WeaponConfig weapon = null;
+        [SerializeField] float healthToRestore = 0;
         [SerializeField] float respawnTime = 5;
         
         private void OnTriggerEnter(Collider other)
@@ -14,17 +16,26 @@ namespace Trisolaris.Combat
             if (other.gameObject.tag == "Player") 
             {
 
-            Pickup(other.gameObject.GetComponent<Fighter>());
+            Pickup(other.gameObject);
 
             }
 
 
         }
 
-        private void Pickup(Fighter fighter)
+        private void Pickup(GameObject subject)
         {
-            fighter.EquipWeapon(weapon);
+            if(weapon != null)
+            {
+                subject.GetComponent<Fighter>().EquipWeapon(weapon);
+            }
+            if(healthToRestore > 0)
+            {
+                subject.GetComponent<Health>().Heal(healthToRestore);
+            }
             StartCoroutine(HideForSeconds(respawnTime));
+
+
         }
 
         private IEnumerator HideForSeconds(float seconds)
@@ -49,7 +60,7 @@ namespace Trisolaris.Combat
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Pickup(callingController.GetComponent<Fighter>());
+                Pickup(callingController.gameObject);
             }
             return true;
         }

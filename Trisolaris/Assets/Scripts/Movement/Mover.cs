@@ -8,9 +8,11 @@ namespace Trisolaris.Movement
     public class Mover : MonoBehaviour, IAction, ISaveable
     {
         [SerializeField] float maxSpeed = 6f;
-        
-        NavMeshAgent navMeshAgent;
-        Animator animator;
+        [SerializeField] float maxNavPathLength = 40;
+
+
+        private NavMeshAgent navMeshAgent;
+        private Animator animator;
 
         private void Awake()
         {
@@ -36,6 +38,21 @@ namespace Trisolaris.Movement
             MoveTo(destination, speedFraction);
         }
         
+        public bool CanMoveTo(Vector3 target)
+        {
+            // If target position is too far away, or the path calculated is a partial path, the path 
+            //will be discarded.
+
+            NavMeshPath path = new NavMeshPath();
+            bool hasPath = NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, path);
+
+            if (!hasPath) return false;
+            if (path.status != NavMeshPathStatus.PathComplete) return false;
+            if (GetPathLength(path) > maxNavPathLength) return false;
+
+            return true;
+
+        }
         public void MoveTo(Vector3 destination, float speedFraction)
         {
             navMeshAgent.destination = destination;
@@ -46,6 +63,21 @@ namespace Trisolaris.Movement
         public void Cancel()
         {
             navMeshAgent.isStopped = true;
+        }
+
+        private float GetPathLength(NavMeshPath path)
+        {
+            Vector3[] corners = path.corners;
+            float pathLength = 0;
+
+            if (path.corners.Length < 2) return pathLength;
+
+            for (int i = 0; i < corners.Length - 1; i++)
+            {
+                pathLength += Vector3.Distance(corners[i], corners[i + 1]);
+            }
+
+            return pathLength;
         }
 
         [System.Serializable]

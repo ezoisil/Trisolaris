@@ -161,6 +161,7 @@ namespace Trisolaris.Combat
         public bool CanAttack(GameObject combatTarget)
         {
             if (combatTarget == null) return false;
+            if(!mover.CanMoveTo(combatTarget.transform.position)) return false;
             Health healthToTest = combatTarget.GetComponent<Health>();
             return healthToTest != null && !healthToTest.IsDead() ;
         }
