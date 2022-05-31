@@ -10,6 +10,7 @@ namespace Trisolaris.Control
     {
         [SerializeField] float chaseDistance = 5f;
         [SerializeField] float suspicionTime = 4f;
+        [SerializeField] float agroTime = 4f;
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float wayPointTolerance = 1f;
         [Range(0,1)]
@@ -26,6 +27,8 @@ namespace Trisolaris.Control
         float timeAtWaypoint = Mathf.Infinity;
         int currentWayPointIndex = 0;
         float timeToWaitAtWaypoint = 6f;
+        float timeSinceAggrevated = Mathf.Infinity;
+
 
 
         private void Awake()
@@ -45,7 +48,7 @@ namespace Trisolaris.Control
 
             if (health.IsDead()) return;
 
-            if (InAttackRangeOfPlayer() && fighter.CanAttack(player))
+            if (IsAggrevated() && fighter.CanAttack(player))
             {
                 AttackBehaviour();               
             }
@@ -61,10 +64,16 @@ namespace Trisolaris.Control
             UpdateTimers();
         }
 
+        public void Aggrevate()
+        {
+            timeSinceAggrevated = 0f;
+        }
+
         private void UpdateTimers()
         {
             timeSinceLastSawPlayer += Time.deltaTime;
             timeAtWaypoint += Time.deltaTime;
+            timeSinceAggrevated += Time.deltaTime;
         }
 
         private void PatrolBehaviour()
@@ -116,10 +125,11 @@ namespace Trisolaris.Control
             fighter.Attack(player);
         }
 
-        private bool InAttackRangeOfPlayer()
+        private bool IsAggrevated()
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-            return distanceToPlayer < chaseDistance;
+                float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+                return distanceToPlayer < chaseDistance || timeSinceAggrevated < agroTime;
+
         }
 
         // Called by Unity
